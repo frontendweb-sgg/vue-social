@@ -38,12 +38,12 @@ export default {}
 </script>
 <script lang="ts" setup>
 import Dropdown from '../ui/Dropdown.vue'
-import { Edit2Icon, Trash2Icon, EyeIcon, EyeOff } from 'lucide-vue-next'
 import DropdownItem from '../ui/DropdownItem.vue'
-import { AppContent } from '../../utils/content'
 import Divider from '../ui/Divider.vue'
+import { Edit2Icon, Trash2Icon, EyeIcon, EyeOff } from 'lucide-vue-next'
+import { AppContent } from '../../utils/content'
 import { useConfirmStore } from '../../stores/confirm'
-import { usePostStore } from '@/stores/post'
+import { usePostStore } from '../../stores/post'
 
 const props = defineProps<{
   noAction?: boolean

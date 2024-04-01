@@ -1,5 +1,5 @@
 <template>
-  <div class="shadow-sm bg-white border-gray-50 border p-4 rounded-md mb-5">
+  <div class="shadow-sm bg-white border-gray-50 border p-4 rounded-md mb-4">
     <post-title :postId="post?.id"></post-title>
 
     <carousel :images="post?.images" />
