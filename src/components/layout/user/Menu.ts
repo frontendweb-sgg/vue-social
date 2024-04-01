@@ -1,4 +1,6 @@
-export const UserSidebarMenu: Menu = [
+import type { Menu } from '@/types/types'
+
+export const UserSidebarMenu: Menu[] = [
   {
     title: 'Menu',
     href: '',

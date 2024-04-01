@@ -4,7 +4,7 @@
       label
     }}</label>
     <div class="hover:ring-1 border border-gray-100 rounded-md">
-      <input v-bind="$attrs" class="bg-transparent w-full p-2 outline-none" />
+      <input v-model="model" v-bind="$attrs" class="bg-transparent w-full p-2 outline-none" />
     </div>
   </div>
 </template>
@@ -13,6 +13,7 @@
 export default {}
 </script>
 <script lang="ts" setup>
+const model = defineModel()
 defineOptions({
   inheritAttrs: false
 })

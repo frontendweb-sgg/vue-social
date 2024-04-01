@@ -1,5 +1,6 @@
 import AuthLayout from '@/components/layout/auth/AuthLayout.vue'
 import PublicLayout from '@/components/layout/public/PublicLayout.vue'
+import { useAuthStore } from '@/stores/auth'
 import { createRouter, createWebHistory, type RouteRecordRaw } from 'vue-router'
 
 const routes: RouteRecordRaw[] = [
@@ -65,19 +66,19 @@ const routes: RouteRecordRaw[] = [
     children: [
       {
         path: '',
-        component: () => import('@/module/admin/dashboard/Dashboard.vue')
+        component: () => import('@/module/user/dashboard/Dashboard.vue')
       },
       {
         path: 'posts',
-        component: () => import('@/module/admin/posts/Posts.vue')
+        component: () => import('@/module/user/posts/Posts.vue')
       },
       {
         path: 'profile',
-        component: () => import('@/module/admin/profile/Profile.vue')
+        component: () => import('@/module/user/profile/Profile.vue')
       },
       {
         path: 'settings',
-        component: () => import('@/module/admin/settings/Settings.vue')
+        component: () => import('@/module/user/settings/Settings.vue')
       }
     ]
   },
@@ -94,5 +95,18 @@ const router = createRouter({
   routes,
   history: createWebHistory()
 })
-
+router.beforeEach((to, from, next) => {
+  const authStore = useAuthStore()
+  if (!authStore.isAuth && to.meta.auth) {
+    return next('/auth')
+  } else {
+    if (authStore.isAuth && !authStore.isAdmin && to.path === '/admin') {
+      return next('/user')
+    } else if (authStore.isAuth && !authStore.isUser && to.path === '/user') {
+      return next('/admin')
+    } else {
+      return next()
+    }
+  }
+})
 export default router

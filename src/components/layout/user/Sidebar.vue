@@ -19,7 +19,7 @@
           <router-link
             active-class="text-rose-600 bg-slate-50 rounded-md"
             class="rounded-sm p-2 block text-sm hover:bg-slate-50"
-            :to="submenu.href"
+            :to="'/user/' + submenu.href"
           >
             {{ submenu.title }}
           </router-link>

@@ -1,4 +1,5 @@
 import { Api } from '@/axios-instance'
+import type { IUser, IUserSignin } from '@/types/types'
 import { defineStore } from 'pinia'
 import { toast } from 'vue3-toastify'
 
@@ -14,7 +15,7 @@ interface AuthResponse {
   expireIn: number
 }
 let timer: ReturnType<typeof setTimeout>
-export const authStore = defineStore('auth', {
+export const useAuthStore = defineStore('auth', {
   state: () =>
     ({
       loading: false,

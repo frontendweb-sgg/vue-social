@@ -10,8 +10,8 @@
       </p>
     </div>
     <form @submit="handleLogin" class="space-y-3">
-      <Input placeholder="Enter email" label="Email" />
-      <Input placeholder="******" label="Password" />
+      <Input type="email" placeholder="Enter email" label="Email" v-model="state.email" />
+      <Input type="password" placeholder="******" label="Password" v-model="state.password" />
       <label class="py-2 space-x-2 block text-xs">
         <input type="checkbox" /> <span>{{ AppContent.rememberMe }}</span>
       </label>
@@ -28,14 +28,14 @@ export default {}
 <script lang="ts" setup>
 import { ref } from 'vue'
 import Input from '@/components/ui/Input.vue'
-import { authStore } from '@/stores/auth'
+import { useAuthStore } from '@/stores/auth'
 import { AppContent } from '@/utils/content'
 const state = ref({
-  email: '',
-  password: ''
+  email: 'pkumar1@pythian.com',
+  password: 'Admin@123'
 })
 
-const auth = authStore()
+const auth = useAuthStore()
 
 function handleLogin(even: Event) {
   even.preventDefault()

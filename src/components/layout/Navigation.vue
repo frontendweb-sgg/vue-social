@@ -7,6 +7,7 @@
       <nav-item
         menu
         to="/auth"
+        v-if="!authStore.isAuth"
         class="bg-slate-700 text-white py-1 px-4 border border-slate-700 rounded-md shadow-md"
         >{{ AppContent.login }}</nav-item
       >
@@ -22,6 +23,12 @@ export default {}
 import NavItem from '../ui/NavItem.vue'
 import { AppContent } from '@/utils/content'
 import { BellIcon } from 'lucide-vue-next'
+
+import { useAuthStore } from '@/stores/auth'
+
+const authStore = useAuthStore()
+
+console.log(authStore)
 </script>
 
 <style>
