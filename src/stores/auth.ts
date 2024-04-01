@@ -26,7 +26,12 @@ export const useAuthStore = defineStore('auth', {
   getters: {
     isAuth: (state) => !!state.token,
     isAdmin: (state) => state.user?.role === 'admin',
-    isUser: (state) => state.user?.role === 'user'
+    isUser: (state) => state.user?.role === 'user',
+    username: (state) => {
+      const names = state.user?.name.split(' ') as string[]
+      console.log('names', names)
+      return names[0][0] + '' + names[1][0]
+    }
   },
   actions: {
     async signIn(payload: IUserSignin) {

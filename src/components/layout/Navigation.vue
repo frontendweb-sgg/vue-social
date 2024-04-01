@@ -11,12 +11,17 @@
         class="bg-slate-700 text-white py-1 px-4 border border-slate-700 rounded-md shadow-md"
         >{{ AppContent.login }}</nav-item
       >
+      <li>
+        <user-control></user-control>
+      </li>
     </ul>
   </nav>
 </template>
 
 <script lang="ts">
-export default {}
+export default {
+  components: { UserControl }
+}
 </script>
 
 <script lang="ts" setup>
@@ -25,6 +30,7 @@ import { AppContent } from '@/utils/content'
 import { BellIcon } from 'lucide-vue-next'
 
 import { useAuthStore } from '@/stores/auth'
+import UserControl from '../common/UserControl.vue'
 
 const authStore = useAuthStore()
 </script>

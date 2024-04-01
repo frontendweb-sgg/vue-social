@@ -4,6 +4,7 @@
     <form enctype="multipart/form-data" @submit.prevent="handlePost" novalidate class="space-y-4">
       <v-input placeholder="Title" name="title" v-model="state.title" />
       <v-textarea v-model="state.description" placeholder="Description"></v-textarea>
+      <file-upload />
       <button>Add</button>
     </form>
   </div>
@@ -18,6 +19,7 @@ import VTextarea from '../ui/Textarea.vue'
 import PostTitle from './PostTitle.vue'
 import { reactive } from 'vue'
 import { usePostStore } from '../../stores/post'
+import FileUpload from '../ui/FileUpload.vue'
 
 const state = reactive({
   title: '',
