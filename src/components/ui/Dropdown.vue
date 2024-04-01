@@ -1,5 +1,5 @@
 <template>
-  <div class="relative" v-outside="handleClose">
+  <div class="relative z-10" v-outside="handleClose">
     <slot name="button" v-bind="{ handleToggle }">
       <button @click="handleToggle"><EllipsisIcon :size="20" /></button>
     </slot>

@@ -43,6 +43,7 @@ import DropdownItem from '../ui/DropdownItem.vue'
 import { AppContent } from '../../utils/content'
 import Divider from '../ui/Divider.vue'
 import { useConfirmStore } from '../../stores/confirm'
+import { usePostStore } from '@/stores/post'
 
 const props = defineProps<{
   noAction?: boolean
@@ -50,9 +51,11 @@ const props = defineProps<{
 }>()
 
 const confirmStore = useConfirmStore()
+const postStore = usePostStore()
 function deletePost() {
   confirmStore.confirmDelete({
     onConfirm: () => {
+      postStore.deletePost(props.postId!)
       confirmStore.cancelConfirm()
     }
   })
