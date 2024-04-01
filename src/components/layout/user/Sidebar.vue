@@ -4,6 +4,7 @@
       <img src="/avatar.png" width="100" height="100" class="rounded-full" />
       <h6>
         Pradeep Kumar
+
         <span class="flex items-center"> <PhoneIcon :size="20" /> 7291893484 </span>
       </h6>
     </div>
