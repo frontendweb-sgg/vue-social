@@ -1,5 +1,5 @@
 <template>
-  <container class="mt-5 mb-5">
+  <container>
     <div class="grid grid-cols-12 gap-6">
       <div class="col-span-3">
         <sidebar />
@@ -16,8 +16,7 @@ export default {}
 </script>
 <script lang="ts" setup>
 import Sidebar from '../../components/layout/user/Sidebar.vue'
-import Container from '@/components/ui/Container.vue'
+import Container from '../../components/ui/Container.vue'
 </script>
 
-<style>
-</style>
+<style></style>

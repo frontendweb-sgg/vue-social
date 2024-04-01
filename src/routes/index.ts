@@ -8,14 +8,16 @@ const routes: RouteRecordRaw[] = [
     path: '/',
     component: () => import(/** webpackChunkName:home */ '@/module/home/Home.vue'),
     meta: {
-      layout: PublicLayout
+      layout: PublicLayout,
+      auth: false
     }
   },
   {
     path: '/auth',
     component: () => import(/** webpackChunkName: auth */ '@/module/auth/Auth.vue'),
     meta: {
-      layout: AuthLayout
+      layout: AuthLayout,
+      auth: false
     },
     children: [
       {
@@ -32,7 +34,8 @@ const routes: RouteRecordRaw[] = [
     path: '/admin',
     component: () => import(/** webpackChunkName: admin */ '@/module/admin/Admin.vue'),
     meta: {
-      layout: AuthLayout
+      layout: AuthLayout,
+      auth: true
     },
     children: [
       {
@@ -61,7 +64,8 @@ const routes: RouteRecordRaw[] = [
     path: '/user',
     component: () => import(/** webpackChunkName: user */ '@/module/user/User.vue'),
     meta: {
-      layout: PublicLayout
+      layout: PublicLayout,
+      auth: true
     },
     children: [
       {
@@ -97,7 +101,9 @@ const router = createRouter({
 })
 router.beforeEach((to, from, next) => {
   const authStore = useAuthStore()
+  console.log(authStore.isAuth, to.meta.auth, 'hi')
   if (!authStore.isAuth && to.meta.auth) {
+    console.log('Hi')
     return next('/auth')
   } else {
     if (authStore.isAuth && !authStore.isAdmin && to.path === '/admin') {

@@ -17,14 +17,12 @@ export default {}
 import { defineProps } from 'vue'
 const props = withDefaults(
   defineProps<{
-    type: 'black' | 'white'
+    type?: 'black' | 'white'
   }>(),
   {
     type: 'black'
   }
 )
-console.log(props)
 </script>
 
-<style>
-</style>
+<style></style>

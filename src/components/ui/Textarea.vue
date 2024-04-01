@@ -1,10 +1,14 @@
 <template>
   <div>
-    <label v-if="props.label" class="block text-slate-600 text-sm font-medium mb-2">{{
-      label
-    }}</label>
+    <label v-if="props.label" class="block text-slate-600 text-sm font-medium mb-2">
+      {{ label }}
+    </label>
     <div class="hover:ring-1 border border-gray-100 rounded-md">
-      <input v-model="model" v-bind="$attrs" class="bg-transparent w-full p-2 outline-none" />
+      <textarea
+        v-model="message"
+        v-bind="$attrs"
+        class="bg-transparent w-full p-2 outline-none"
+      ></textarea>
     </div>
   </div>
 </template>
@@ -12,17 +16,16 @@
 <script lang="ts">
 export default {}
 </script>
-<script lang="ts" setup>
-import { computed } from 'vue'
 
-const model = defineModel({ default: '' })
+<script lang="ts" setup>
+const message = defineModel({ default: '' })
+
 defineOptions({
   inheritAttrs: false
 })
 
 const props = defineProps<{
   label?: string
-  validation?: Object
 }>()
 </script>
 

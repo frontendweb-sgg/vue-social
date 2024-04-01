@@ -26,6 +26,34 @@ export const usePostStore = defineStore('post', {
       } catch (error) {
         if (error instanceof Error) toast.error(error.message)
       }
+    },
+    async addPost(payload: IPost) {
+      try {
+        this.loading = true
+        const formdata = new FormData()
+
+        formdata.append('title', payload.title)
+        formdata.append('description', payload.description)
+        for (const image of payload.images!) {
+          formdata.append('images', image)
+        }
+
+        const response = await Api.post('/post', formdata)
+        this.loading = false
+        this.posts = response.data
+      } catch (error) {
+        if (error instanceof Error) toast.error(error.message)
+      }
+    },
+    async deletePost(postId: string) {
+      try {
+        const response = await Api.delete(`/post/${postId}`)
+        if (response.status == 200) {
+          this.posts = this.posts.filter((post) => post.id !== postId)
+        }
+      } catch (error) {
+        if (error instanceof Error) toast.error(error.message)
+      }
     }
   }
 })

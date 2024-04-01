@@ -9,6 +9,23 @@ const pinia = createPinia()
 // App instance
 const app = createApp(App)
 
+// directives
+app.directive('outside', {
+  created(el, binding) {
+    el.clickOutside = (event: MouseEvent) => {
+      if (el && !el.contains(event.target)) {
+        binding.value()
+      }
+    }
+  },
+  mounted(el, binding) {
+    document.addEventListener('click', el.clickOutside)
+  },
+  unmounted(el, binding) {
+    document.removeEventListener('click', el.clickOutside)
+  }
+})
+
 pinia.use(({ store }) => {
   store.router = markRaw(router)
 })

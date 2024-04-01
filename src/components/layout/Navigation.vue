@@ -27,9 +27,6 @@ import { BellIcon } from 'lucide-vue-next'
 import { useAuthStore } from '@/stores/auth'
 
 const authStore = useAuthStore()
-
-console.log(authStore)
 </script>
 
-<style>
-</style>
+<style></style>

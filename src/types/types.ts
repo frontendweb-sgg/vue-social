@@ -32,15 +32,15 @@ export interface Menu {
 }
 
 export interface IPost {
-  id: string
-  user: string
+  id?: string
+  user?: string
   title: string
-  slug: string
+  slug?: string
   description: string
-  active: boolean
-  images: string[]
-  comments: IComment[]
-  likes: ILike[]
+  active?: boolean
+  images?: string[]
+  comments?: IComment[]
+  likes?: ILike[]
 }
 
 export interface ILike {

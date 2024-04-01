@@ -12,11 +12,11 @@ export const UserSidebarMenu: Menu[] = [
       {
         title: 'Posts',
         href: 'posts'
-      },
-      {
-        title: 'Photos',
-        href: 'photos'
       }
+      // {
+      //   title: 'Photos',
+      //   href: 'photos'
+      // }
     ]
   },
   {
@@ -27,10 +27,10 @@ export const UserSidebarMenu: Menu[] = [
         title: 'Profile',
         href: 'profile'
       },
-      {
-        title: 'Reset Password',
-        href: 'reset-password'
-      },
+      // {
+      //   title: 'Reset Password',
+      //   href: 'reset-password'
+      // },
       {
         title: 'Settings',
         href: 'settings'
