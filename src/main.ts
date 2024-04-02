@@ -2,6 +2,7 @@ import App from './App.vue'
 import router from './routes'
 import { createApp, markRaw } from 'vue'
 import { createPinia } from 'pinia'
+import 'vue3-toastify/dist/index.css'
 import './index.css'
 
 const pinia = createPinia()
