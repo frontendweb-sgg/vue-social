@@ -1,5 +1,5 @@
 import { Api } from '@/axios-instance'
-import type { IUser, IUserSignin } from '@/types/types'
+import type { IUser, IUserSignin, IUserSignup } from '@/types/types'
 import { defineStore } from 'pinia'
 import { toast } from 'vue3-toastify'
 
@@ -60,7 +60,22 @@ export const useAuthStore = defineStore('auth', {
         if (error instanceof Error) toast.error(error.message)
       }
     },
-    async signUp() {},
+    async signUp(payload: IUserSignup) {
+      try {
+        this.loading = true
+        const response = await Api.post('/auth/signup', payload)
+        if (response.status === 201) {
+          toast.success('Account created successfully!, please login')
+          setTimeout(() => {
+            this.router.push('/auth')
+          }, 3000)
+        }
+      } catch (error) {
+        if (error instanceof Error) toast.error(error.message)
+      } finally {
+        this.loading = false
+      }
+    },
 
     // Logout
     logout() {
