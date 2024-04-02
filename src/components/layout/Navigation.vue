@@ -9,7 +9,7 @@
         to="/auth"
         v-if="!authStore.isAuth"
         class="bg-slate-700 text-white py-1 px-4 border border-slate-700 rounded-md shadow-md"
-        >{{ AppContent.login }}</nav-item
+        >{{ AppContent.signin }}</nav-item
       >
       <li v-if="authStore.isAuth">
         <user-control></user-control>

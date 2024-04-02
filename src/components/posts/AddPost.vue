@@ -21,13 +21,15 @@
             :class="['hover:text-rose-600', state.images.length && 'text-rose-600']"
             title="Upload image"
             multiple
+            ref="imageUploadRef"
           />
           <file-upload
             accept="video/*"
             icon="Video"
-            v-model="state.videoUrl"
             class="hover:text-rose-600"
             title="Upload video"
+            v-model="state.videoUrl"
+            ref="videoUploadRef"
           />
           <v-select
             :get-option-label="(option) => option.title"
@@ -55,30 +57,41 @@ import PostTitle from './PostTitle.vue'
 import FileUpload from '../ui/FileUpload.vue'
 import VSelect from '../ui/Select.vue'
 import Box from '../ui/Box.vue'
+import DisplayImages from '../ui/DisplayImages.vue'
 import { Camera, Video } from 'lucide-vue-next'
-import { reactive } from 'vue'
+import { reactive, ref } from 'vue'
 import { usePostStore } from '../../stores/post'
 import { PostStatus } from '../../utils/constants'
 import { AppContent } from '../../utils/content'
-import DisplayImages from '../ui/DisplayImages.vue'
-const initialState = {
+
+interface IPost {
+  description: ''
+  status: string
+  videoUrl: string
+  images: File[]
+}
+
+const postStore = usePostStore()
+
+let state = reactive<IPost>({
   description: '',
   images: [],
   status: 'public',
   videoUrl: ''
-}
-let state = reactive(initialState)
+})
 
-const postStore = usePostStore()
+const imageUploadRef = ref()
+const videoUploadRef = ref()
 
 function handlePost(event: Event) {
-  console.log(state)
+  console.log('state', state)
   if (state.images.length > 5) return
   // postStore.addPost(state)
 }
 function handleReset() {
-  state.description = ''
   state.images = []
+  imageUploadRef.value.reset()
+  videoUploadRef.value.reset()
 }
 
 // function uploader(values: File[]) {

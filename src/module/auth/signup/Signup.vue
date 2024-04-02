@@ -60,8 +60,7 @@ const validation = yup.object({
   mobile: yup.string().min(10).max(10).required('Mobile is required!')
 })
 
-function onSumbmit(values) {
-  console.log(values)
+function onSumbmit(values: any) {
   authStore.signUp(values)
 }
 </script>
