@@ -47,7 +47,7 @@ const props = defineProps<{
   multiple?: boolean
 }>()
 
-const singleFile = ref<File | File[] | Object>({ default: props.multiple ? [] : [] })
+const singleFile = ref<File | File[] | Object>(props.multiple ? [] : '')
 const emit = defineEmits<{
   (e: 'setValues', values: File[]): void
 }>()
@@ -61,7 +61,6 @@ function handleChange(event: Event) {
     singleFile.value = Array.of(...files)
   } else {
     singleFile.value = files[0]
-    console.log('hi', singleFile.value)
   }
 }
 

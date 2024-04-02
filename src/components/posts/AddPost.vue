@@ -12,6 +12,8 @@
         AppContent.moreThan5Image
       }}</span>
       <display-images v-if="state.images.length" @update="handleRemove" :images="state.images" />
+      <!-- <display-images v-if="isVideo" @update="handleRemove" :images="state.videoUrl" /> -->
+
       <Box class="px-4 pt-3">
         <Box class="space-x-4 text-slate-600">
           <file-upload
@@ -30,6 +32,7 @@
             title="Upload video"
             v-model="state.videoUrl"
             ref="videoUploadRef"
+            mode="video"
           />
           <v-select
             :get-option-label="(option) => option.title"
@@ -37,9 +40,18 @@
             :options="PostStatus"
           />
         </Box>
-        <div>
-          <button type="button" @click="handleReset">{{ AppContent.reset }}</button>
-          <button type="submit" class="bg-indigo-700 px-6 py-1 rounded-md text-white">
+        <div class="space-x-4">
+          <button
+            class="border border-slate-500 px-6 py-1 hover:bg-indigo-700 hover:text-white rounded-md text-slate-700"
+            type="button"
+            @click="handleReset"
+          >
+            {{ AppContent.reset }}
+          </button>
+          <button
+            type="submit"
+            class="bg-indigo-700 border border-indigo-700 px-6 py-1 rounded-md text-white"
+          >
             {{ AppContent.post }}
           </button>
         </div>
@@ -59,7 +71,7 @@ import VSelect from '../ui/Select.vue'
 import Box from '../ui/Box.vue'
 import DisplayImages from '../ui/DisplayImages.vue'
 import { Camera, Video } from 'lucide-vue-next'
-import { reactive, ref } from 'vue'
+import { computed, reactive, ref } from 'vue'
 import { usePostStore } from '../../stores/post'
 import { PostStatus } from '../../utils/constants'
 import { AppContent } from '../../utils/content'
@@ -67,7 +79,7 @@ import { AppContent } from '../../utils/content'
 interface IPost {
   description: ''
   status: string
-  videoUrl: string
+  videoUrl: File
   images: File[]
 }
 
@@ -77,7 +89,7 @@ let state = reactive<IPost>({
   description: '',
   images: [],
   status: 'public',
-  videoUrl: ''
+  videoUrl: {} as File
 })
 
 const imageUploadRef = ref()
@@ -97,6 +109,8 @@ function handleReset() {
 // function uploader(values: File[]) {
 //   // state.images = values as any
 // }
+
+const isVideo = computed(() => !!state.videoUrl)
 
 function handleRemove(index: number) {
   state.images.splice(index, 1)
