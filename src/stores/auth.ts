@@ -28,14 +28,17 @@ export const useAuthStore = defineStore('auth', {
     isAdmin: (state) => state.user?.role === 'admin',
     isUser: (state) => state.user?.role === 'user',
     username: (state) => {
-      const names = state.user?.name.split(' ') as string[]
-      console.log('names', names)
-      return names[0][0] + '' + names[1][0]
+      const names = state.user?.name.split(' ') ?? ([] as string[])
+      if (names.length) {
+        return names[0][0] + '' + names[1][0]
+      }
+      return ''
     }
   },
   actions: {
     async signIn(payload: IUserSignin) {
       try {
+        this.loading = true
         const { data } = await Api.post<AuthResponse>('/auth', payload)
 
         const today = new Date(Date.now())
@@ -58,6 +61,8 @@ export const useAuthStore = defineStore('auth', {
         }
       } catch (error) {
         if (error instanceof Error) toast.error(error.message)
+      } finally {
+        this.loading = false
       }
     },
     async signUp(payload: IUserSignup) {

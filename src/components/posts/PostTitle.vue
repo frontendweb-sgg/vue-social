@@ -1,5 +1,5 @@
 <template>
-  <div class="flex justify-between items-center mb-6">
+  <div class="flex justify-between items-center">
     <div class="flex space-x-3">
       <img
         class="self-center overflow-hidden rounded-full ring-2 p-1 ring-gray-200"
@@ -10,7 +10,7 @@
       <div>
         <h6 class="font-medium text-sm text-slate-700 leading-4">
           Pradeep Kumar
-          <span class="block text-xs text-slate-400 font-normal">2 hours ago</span>
+          <span class="block text-xs text-slate-400 font-normal">{{ props.date }}</span>
         </h6>
       </div>
     </div>
@@ -45,10 +45,16 @@ import { AppContent } from '../../utils/content'
 import { useConfirmStore } from '../../stores/confirm'
 import { usePostStore } from '../../stores/post'
 
-const props = defineProps<{
-  noAction?: boolean
-  postId: string | undefined
-}>()
+const props = withDefaults(
+  defineProps<{
+    noAction?: boolean
+    postId?: string | undefined
+    date?: string
+  }>(),
+  {
+    date: new Date(Date.now()).toDateString()
+  }
+)
 
 const confirmStore = useConfirmStore()
 const postStore = usePostStore()

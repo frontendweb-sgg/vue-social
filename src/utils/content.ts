@@ -2,7 +2,7 @@ export const AppContent = {
   brand: 'Vue Social',
   ok: 'Ok',
   cancel: 'Cancel',
-  login: 'Login',
+  signin: 'Sign in',
   signup: 'Sign up',
   rememberMe: 'Remember me',
   loginSubtitle: `If you don't have an account, please click on`,
@@ -13,5 +13,10 @@ export const AppContent = {
   active: 'Active',
   areYouSure: "Yes, I'm sure",
   noCancel: 'No, cancel',
-  confirmDialogMessage: 'Are you sure you want to delete this post?'
+  confirmDialogMessage: 'Are you sure you want to delete this post?',
+  browse: 'Browse',
+  dragDrop: 'Drag and drop files',
+  post: 'Post',
+  moreThan5Image: 'You can not upload more than 5 files',
+  reset: 'Reset'
 }

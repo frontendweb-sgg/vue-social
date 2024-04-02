@@ -5,7 +5,7 @@
     </slot>
     <div
       v-if="open"
-      class="absolute border border-gray-50 p-4 right-0 min-w-[160px] rounded-md bg-white shadow-sm"
+      class="absolute border border-gray-50 p-2 right-0 min-w-[160px] rounded-md bg-white shadow-sm"
     >
       <slot></slot>
     </div>

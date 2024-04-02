@@ -11,7 +11,7 @@
         class="bg-slate-700 text-white py-1 px-4 border border-slate-700 rounded-md shadow-md"
         >{{ AppContent.login }}</nav-item
       >
-      <li>
+      <li v-if="authStore.isAuth">
         <user-control></user-control>
       </li>
     </ul>
@@ -26,10 +26,10 @@ export default {
 
 <script lang="ts" setup>
 import NavItem from '../ui/NavItem.vue'
-import { AppContent } from '@/utils/content'
+import { AppContent } from '../../utils/content'
 import { BellIcon } from 'lucide-vue-next'
 
-import { useAuthStore } from '@/stores/auth'
+import { useAuthStore } from '../../stores/auth'
 import UserControl from '../common/UserControl.vue'
 
 const authStore = useAuthStore()

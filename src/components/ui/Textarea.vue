@@ -3,11 +3,11 @@
     <label v-if="props.label" class="block text-slate-600 text-sm font-medium mb-2">
       {{ label }}
     </label>
-    <div class="hover:ring-1 border border-gray-100 rounded-md">
+    <div :classs="['hover:ring-1 border border-gray-100 rounded-md', $attrs.class]">
       <textarea
         v-model="message"
         v-bind="$attrs"
-        class="bg-transparent w-full p-2 outline-none"
+        class="bg-transparent text-sm text-slate-600 w-full p-2 outline-none"
       ></textarea>
     </div>
   </div>

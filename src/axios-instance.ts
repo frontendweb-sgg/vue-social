@@ -18,7 +18,6 @@ instance.interceptors.request.use((config) => {
 })
 
 instance.interceptors.response.use((config) => {
-  console.log('CONFIG RESPONSE', config)
   return config
 })
 

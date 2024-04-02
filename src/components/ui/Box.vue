@@ -1,12 +1,11 @@
 <template>
-  <div class="max-w-[960px] px-4 mx-auto">
-    <slot></slot>
+  <div class="flex items-center justify-between">
+    <slot />
   </div>
 </template>
 
 <script lang="ts">
 export default {}
 </script>
-<script lang="ts" setup></script>
 
 <style></style>

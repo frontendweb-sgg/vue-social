@@ -4,7 +4,11 @@
       label
     }}</label>
     <div class="hover:ring-1 border border-gray-100 rounded-md">
-      <input v-model="model" v-bind="$attrs" class="bg-transparent w-full p-2 outline-none" />
+      <input
+        v-model="model"
+        v-bind="$attrs"
+        class="text-sm bg-transparent w-full p-2 outline-none"
+      />
     </div>
   </div>
 </template>

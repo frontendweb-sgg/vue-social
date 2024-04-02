@@ -1,12 +1,13 @@
 import AuthLayout from '@/components/layout/auth/AuthLayout.vue'
 import PublicLayout from '@/components/layout/public/PublicLayout.vue'
 import { useAuthStore } from '@/stores/auth'
+import { useLoaderStore } from '@/stores/loader'
 import { createRouter, createWebHistory, type RouteRecordRaw } from 'vue-router'
 
 const routes: RouteRecordRaw[] = [
   {
     path: '/',
-    component: () => import(/** webpackChunkName:home */ '@/module/home/Home.vue'),
+    component: () => import(/* webpackChunkName:"home" */ '@/module/home/Home.vue'),
     meta: {
       layout: PublicLayout,
       auth: false
@@ -14,7 +15,7 @@ const routes: RouteRecordRaw[] = [
   },
   {
     path: '/auth',
-    component: () => import(/** webpackChunkName: auth */ '@/module/auth/Auth.vue'),
+    component: () => import(/* webpackChunkName: "auth" */ '@/module/auth/Auth.vue'),
     meta: {
       layout: AuthLayout,
       auth: false
@@ -32,7 +33,7 @@ const routes: RouteRecordRaw[] = [
   },
   {
     path: '/admin',
-    component: () => import(/** webpackChunkName: admin */ '@/module/admin/Admin.vue'),
+    component: () => import(/* webpackChunkName: "admin" */ '@/module/admin/Admin.vue'),
     meta: {
       layout: AuthLayout,
       auth: true
@@ -62,7 +63,7 @@ const routes: RouteRecordRaw[] = [
   },
   {
     path: '/user',
-    component: () => import(/** webpackChunkName: user */ '@/module/user/User.vue'),
+    component: () => import(/* webpackChunkName: "user" */ '@/module/user/User.vue'),
     meta: {
       layout: PublicLayout,
       auth: true
@@ -88,7 +89,7 @@ const routes: RouteRecordRaw[] = [
   },
   {
     path: '/:not-found(.*)*',
-    component: () => import(/** webpackChunkName:notFound */ '@/module/not-found/NotFound.vue'),
+    component: () => import(/* webpackChunkName: "notFound" */ '@/module/not-found/NotFound.vue'),
     meta: {
       layout: AuthLayout
     }
@@ -101,7 +102,7 @@ const router = createRouter({
 })
 router.beforeEach((to, from, next) => {
   const authStore = useAuthStore()
-  console.log(authStore.isAuth, to.meta.auth, 'hi')
+
   if (!authStore.isAuth && to.meta.auth) {
     console.log('Hi')
     return next('/auth')
@@ -114,5 +115,19 @@ router.beforeEach((to, from, next) => {
       return next()
     }
   }
+})
+
+router.beforeResolve((to, from, next) => {
+  const useLoader = useLoaderStore()
+
+  if (to.path) {
+    useLoader.loadingStart()
+  }
+  next()
+})
+
+router.afterEach(() => {
+  const useLoader = useLoaderStore()
+  useLoader.loadingEnd()
 })
 export default router
