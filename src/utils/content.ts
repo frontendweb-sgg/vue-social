@@ -37,7 +37,7 @@ export const AppContent = {
   authForgetText: 'Back to login page, please',
   authEmailVerify: 'Please verify your email',
   appName: 'Profiler',
-  authHeading: 'Welcome to Profiler',
+  authHeading: 'Welcome Back!',
   homePageContent: `Profiler is a social network site that can be used to connect developers. 
                     use this site for multipurpose social activities like job, videos, learning, 
                     bloging and much more. Now join & connect with cool Developers around the world !!! `
