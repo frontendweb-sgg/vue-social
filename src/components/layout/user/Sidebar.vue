@@ -1,13 +1,7 @@
 <template>
-  <aside class="p-4 bg-white shadow-sm">
-    <div class="flex flex-col items-center text-center">
-      <img src="/avatar.png" width="100" height="100" class="rounded-full" />
-      <h6>
-        Pradeep Kumar
+  <aside class="p-4 bg-white shadow-sm rounded-md">
+    <user-sidebar></user-sidebar>
 
-        <span class="flex items-center"> <PhoneIcon :size="20" /> 7291893484 </span>
-      </h6>
-    </div>
     <div v-for="(menu, index) in UserSidebarMenu" :key="index" class="mt-6">
       <span class="text-slate-500 block text-[10px] uppercase mb-2">{{ menu.title }}</span>
       <ul class="mb-5">
@@ -17,8 +11,8 @@
           :key="subindex + '-' + index"
         >
           <router-link
-            active-class="text-rose-600 bg-slate-50 rounded-md"
-            class="rounded-sm p-2 block text-sm hover:bg-slate-50"
+            active-class="text-rose-600  bg-slate-50 rounded-md"
+            class="font-semibold rounded-sm p-2 block text-sm hover:bg-slate-50"
             :to="'/user/' + submenu.href"
           >
             {{ submenu.title }}
@@ -33,8 +27,7 @@
 export default {}
 </script>
 <script lang="ts" setup>
-import { PhoneIcon } from 'lucide-vue-next'
 import { UserSidebarMenu } from './Menu'
+import UserSidebar from '@/components/common/UserSidebar.vue'
 </script>
-<style>
-</style>
+<style></style>

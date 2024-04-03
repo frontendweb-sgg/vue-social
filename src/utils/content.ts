@@ -19,5 +19,8 @@ export const AppContent = {
   post: 'Post',
   moreThan5Image: 'You can not upload more than 5 files',
   reset: 'Reset',
-  reply: 'Replay'
+  reply: 'Replay',
+  profile: 'Profile',
+  settings: 'Settings',
+  logout: 'Logout'
 }
