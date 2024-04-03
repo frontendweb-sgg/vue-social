@@ -87,8 +87,16 @@ export const usePostStore = defineStore('post', {
     },
     async deleteComment(postId: string, commentId: string) {
       try {
-        const response = await Api.delete(`/post/${postId}/comment/${commentId}`)
+        const { data } = await Api.delete(`/post/${postId}/comment/${commentId}`)
 
+        this.posts = this.posts.map((post) =>
+          post.id === postId
+            ? {
+                ...post,
+                comments: post.comments.filter((comment) => comment.id !== commentId)
+              }
+            : post
+        )
         toast.success('Comment deleted!')
       } catch (error) {
         if (error instanceof Error) toast.error(error.message)

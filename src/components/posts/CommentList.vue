@@ -5,7 +5,6 @@
       v-for="comment of props.comments"
       :key="comment._id"
     >
-      {{ comment }}
       <div class="pt-1">
         <img src="/avatar.png" class="rounded-full overflow-hidden" width="25" />
       </div>
@@ -27,8 +26,8 @@
 export default {}
 </script>
 <script lang="ts" setup>
-import { X } from 'lucide-vue-next'
 import type { IComment } from '../../types/types'
+import { X } from 'lucide-vue-next'
 import { usePostStore } from '../../stores'
 
 const props = defineProps<{
