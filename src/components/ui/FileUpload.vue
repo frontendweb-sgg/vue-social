@@ -7,7 +7,7 @@
       :title="($attrs.title ?? '').toString()"
       class="relative"
     >
-      <tooltip class="bottom-7" v-if="open">{{ $attrs.title }}</tooltip>
+      <tooltip class="bottom-7" v-if="open && $attrs.title">{{ $attrs.title }}</tooltip>
       <input
         id="file"
         class="hidden"

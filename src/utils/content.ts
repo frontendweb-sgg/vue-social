@@ -18,5 +18,6 @@ export const AppContent = {
   dragDrop: 'Drag and drop files',
   post: 'Post',
   moreThan5Image: 'You can not upload more than 5 files',
-  reset: 'Reset'
+  reset: 'Reset',
+  reply: 'Replay'
 }

@@ -1,5 +1,5 @@
 import { Api } from '@/axios-instance'
-import type { IPost } from '@/types/types'
+import type { IPost, IComment } from '@/types/types'
 import { defineStore } from 'pinia'
 import { toast } from 'vue3-toastify'
 
@@ -57,6 +57,39 @@ export const usePostStore = defineStore('post', {
         if (response.status == 200) {
           this.posts = this.posts.filter((post) => post.id !== postId)
         }
+      } catch (error) {
+        if (error instanceof Error) toast.error(error.message)
+      }
+    },
+    async addComment(postId: string, payload: IComment) {
+      try {
+        const formdata = new FormData()
+        formdata.append('message', payload.message)
+        for (const image of payload.images!) {
+          formdata.append('images', image)
+        }
+        const response = await Api.post(`/post/${postId}/comment`, formdata, {
+          headers: { 'Content-Type': 'multipart/form-data' }
+        })
+
+        this.posts = this.posts.map((post) =>
+          post.id === postId
+            ? {
+                ...post,
+                comments: response.data
+              }
+            : post
+        )
+        toast.success('Comment added!')
+      } catch (error) {
+        if (error instanceof Error) toast.error(error.message)
+      }
+    },
+    async deleteComment(postId: string, commentId: string) {
+      try {
+        const response = await Api.delete(`/post/${postId}/comment/${commentId}`)
+
+        toast.success('Comment deleted!')
       } catch (error) {
         if (error instanceof Error) toast.error(error.message)
       }

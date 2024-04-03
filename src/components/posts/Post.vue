@@ -1,25 +1,30 @@
 <template>
-  <div class="shadow-sm bg-white border-gray-50 border p-4 rounded-md mb-4">
-    <post-title :postId="post?.id"></post-title>
-
-    <carousel :images="post?.images" />
-    <!-- <div class="relative w-full" v-for="(image, index) in post.images" :key="index">
-        <img :src="image" />
-      </div> -->
+  <div class="shadow-sm bg-white border-gray-50 border p-4 rounded-md mb-5">
+    <post-title class="mb-5" :postId="post?.id"></post-title>
+    <p v-if="post.content" class="text-sm mb-4">{{ post.content }}</p>
+    <carousel :images="images" />
+    <comment-list :post-id="post.id" :comments="post.comments" />
+    <add-comment :post-id="props.post.id" />
   </div>
 </template>
 
 <script lang="ts">
-export default {}
+export default {
+  components: { CommentList, AddComment }
+}
 </script>
 <script lang="ts" setup>
 import type { IPost } from '../../types/types'
 import Carousel from '../ui/Carousel.vue'
+import AddComment from './AddComment.vue'
+import CommentList from './CommentList.vue'
 import PostTitle from './PostTitle.vue'
 
 const props = defineProps<{
   post: IPost
 }>()
+
+const images = props.post.images as unknown as string[]
 </script>
 
 <style></style>

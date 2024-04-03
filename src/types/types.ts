@@ -52,9 +52,13 @@ export interface ILike {
 }
 
 export interface IComment {
-  user: string
+  _id?: string
+  id?: string
+  user?: string
   message: string
   status: Status
+  images?: File[]
+  createdAt?: Date
 }
 export type Color = 'primary' | 'secondary' | 'info' | 'success' | 'warning' | 'default' | 'gray'
 export type Size = 'xs' | 'sm' | 'md' | 'lg' | 'xl'
