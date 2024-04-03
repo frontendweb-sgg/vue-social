@@ -1,8 +1,15 @@
 <template>
   <div class="flex justify-between items-center">
-    <post-user :date="date" />
-
-    <dropdown v-if="!props.noAction">
+    <div class="flex space-x-3">
+      <img :src="avatar" class="rounded-full bg-transparent w-8 h-8 overflow-hidden" />
+      <div>
+        <h6 class="font-medium t{ext-sm text-slate-700 leading-5">
+          {{ name }}
+          <span class="block text-xs text-slate-400 font-normal">{{ date }}</span>
+        </h6>
+      </div>
+    </div>
+    <dropdown v-if="userId === props.userId">
       <dropdown-item icon="Edit2Icon">
         {{ AppContent.edit }}
       </dropdown-item>
@@ -31,19 +38,26 @@ import { Edit2Icon, Trash2Icon, EyeIcon, EyeOff } from 'lucide-vue-next'
 import { AppContent } from '../../utils/content'
 import { useConfirmStore } from '../../stores/confirm'
 import { usePostStore } from '../../stores/post'
-import PostUser from '../common/PostUser.vue'
+import { useAuthStore } from '../../stores'
+import { storeToRefs } from 'pinia'
 
 const props = withDefaults(
   defineProps<{
     noAction?: boolean
-    postId?: string | undefined
-    date?: string
+    postId: string
+    date: string
+    name: string
+    avatar: string
+    userId: string
   }>(),
   {
-    date: new Date(Date.now()).toDateString()
+    date: new Date(Date.now()).toDateString(),
+    avatar: '/avatar-1.png'
   }
 )
 
+const authStore = useAuthStore()
+const { userId } = storeToRefs(authStore)
 const confirmStore = useConfirmStore()
 const postStore = usePostStore()
 function deletePost() {

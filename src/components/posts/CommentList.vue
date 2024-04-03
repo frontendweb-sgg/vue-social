@@ -12,7 +12,9 @@
         <h6 class="text-sm font-medium text-slate-800">Pradeep Kumar</h6>
         <p class="text-sm text-slate-600">{{ comment.message }}</p>
       </div>
+
       <button
+        v-if="userId === comment.user"
         @click="() => handleDelete(comment?.id)"
         class="opacity-0 hover:text-rose-500 group-hover:opacity-100 absolute top-3 right-0"
       >
@@ -28,7 +30,11 @@ export default {}
 <script lang="ts" setup>
 import type { IComment } from '../../types/types'
 import { X } from 'lucide-vue-next'
-import { usePostStore } from '../../stores'
+import { useAuthStore, usePostStore } from '../../stores'
+import { storeToRefs } from 'pinia'
+
+const authStore = useAuthStore()
+const { userId } = storeToRefs(authStore)
 
 const props = defineProps<{
   comments: IComment[] | undefined

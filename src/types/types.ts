@@ -34,7 +34,7 @@ export interface Menu {
 
 export interface IPost {
   id?: string
-  user?: string
+  user?: IUser | string
   content: string
   images: File[]
   code?: string
@@ -45,6 +45,7 @@ export interface IPost {
   tags?: string[]
   status?: Status
   postSatus?: PostStatusEnum
+  createdAt?: string
 }
 
 export interface ILike {
