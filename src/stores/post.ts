@@ -71,7 +71,6 @@ export const usePostStore = defineStore('post', {
         const response = await Api.post(`/post/${postId}/comment`, formdata, {
           headers: { 'Content-Type': 'multipart/form-data' }
         })
-
         this.posts = this.posts.map((post) =>
           post.id === postId
             ? {
@@ -93,11 +92,44 @@ export const usePostStore = defineStore('post', {
           post.id === postId
             ? {
                 ...post,
-                comments: post.comments.filter((comment) => comment.id !== commentId)
+                comments: post.comments?.filter((comment) => comment.id !== commentId)
               }
             : post
         )
         toast.success('Comment deleted!')
+      } catch (error) {
+        if (error instanceof Error) toast.error(error.message)
+      }
+    },
+    async addLike(postId: string) {
+      try {
+        const { data } = await Api.put(`/post/${postId}/like`)
+        this.posts = this.posts.map((post) =>
+          post.id === postId
+            ? {
+                ...post,
+                likes: data
+              }
+            : post
+        )
+
+        toast.success('You have like the post!')
+      } catch (error) {
+        if (error instanceof Error) toast.error(error.message)
+      }
+    },
+    async removeLike(postId: string) {
+      try {
+        const { data } = await Api.put(`/post/${postId}/dislike`)
+        this.posts = this.posts.map((post) =>
+          post.id === postId
+            ? {
+                ...post,
+                likes: data
+              }
+            : post
+        )
+        toast.success('You have dislike the post!')
       } catch (error) {
         if (error instanceof Error) toast.error(error.message)
       }
