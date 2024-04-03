@@ -44,11 +44,11 @@ import { storeToRefs } from 'pinia'
 const props = withDefaults(
   defineProps<{
     noAction?: boolean
-    postId: string
+    postId: string | undefined
     date: string
     name: string
     avatar: string
-    userId: string
+    userId: string | undefined
   }>(),
   {
     date: new Date(Date.now()).toDateString(),

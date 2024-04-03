@@ -61,7 +61,14 @@ import { Field, ErrorMessage } from 'vee-validate'
 import * as yup from 'yup'
 
 const validation = yup.object({
-  email: yup.string().email().required('Email is required!'),
+  email: yup
+    .string()
+    .required('Field is required')
+    .test('emailOrMobile', 'Enter a valid email or mobile number', (value) => {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+      const mobileRegex = /^\d{10}$/ // Assuming mobile number is a 10-digit number
+      return emailRegex.test(value) || mobileRegex.test(value)
+    }),
   password: yup.string().required('Password is required!')
 })
 
