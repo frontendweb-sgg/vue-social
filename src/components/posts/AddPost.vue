@@ -1,18 +1,19 @@
 <template>
   <div class="border py-4 border-gray-50 mb-6 bg-white shadow-sm rounded-md">
     <post-title no-action class="px-4 mb-4" />
-    <form enctype="multipart/form-data" @submit.prevent="handlePost" novalidate>
+    <form @submit.prevent="handlePost" novalidate>
       <v-textarea
         :rows="4"
-        class="rounded-none p-4 bg-gray-100/35"
-        v-model="state.description"
+        class="rounded-none p-4 bg-gray-200/20 focus:bg-gray-100"
+        v-model="state.content"
         placeholder="What's in your mind..."
       ></v-textarea>
       <span v-if="state.images.length > 5" class="text-xs text-red-600 px-3">{{
         AppContent.moreThan5Image
       }}</span>
+
       <display-images v-if="state.images.length" @update="handleRemove" :images="state.images" />
-      <!-- <display-images v-if="isVideo" @update="handleRemove" :images="state.videoUrl" /> -->
+      <video-display v-if="state.videoUrl" :data="state.videoUrl"></video-display>
 
       <Box class="px-4 pt-3">
         <Box class="space-x-4 text-slate-600">
@@ -36,24 +37,17 @@
           />
           <v-select
             :get-option-label="(option) => option.title"
-            v-model="state.status"
+            v-model="state.postSatus"
             :options="PostStatus"
           />
         </Box>
-        <div class="space-x-4">
-          <button
-            class="border border-slate-500 px-6 py-1 hover:bg-indigo-700 hover:text-white rounded-md text-slate-700"
-            type="button"
-            @click="handleReset"
-          >
+        <div class="space-x-2">
+          <Button @click="handleReset" type="reset" class="hover:bg-gray-100">
             {{ AppContent.reset }}
-          </button>
-          <button
-            type="submit"
-            class="bg-indigo-700 border border-indigo-700 px-6 py-1 rounded-md text-white"
-          >
+          </Button>
+          <Button type="submit" class="bg-indigo-700 border border-indigo-700 text-white">
             {{ AppContent.post }}
-          </button>
+          </Button>
         </div>
       </Box>
     </form>
@@ -70,47 +64,39 @@ import FileUpload from '../ui/FileUpload.vue'
 import VSelect from '../ui/Select.vue'
 import Box from '../ui/Box.vue'
 import DisplayImages from '../ui/DisplayImages.vue'
+import Button from '../ui/Button.vue'
+import VideoDisplay from '../ui/VideoDisplay.vue'
 import { Camera, Video } from 'lucide-vue-next'
 import { computed, reactive, ref } from 'vue'
 import { usePostStore } from '../../stores/post'
 import { PostStatus } from '../../utils/constants'
 import { AppContent } from '../../utils/content'
-
-interface IPost {
-  description: ''
-  status: string
-  videoUrl: File
-  images: File[]
-}
+import type { IPost } from '../../types/types'
+import { Status, PostStatusEnum } from '../../utils/enums'
 
 const postStore = usePostStore()
 
 let state = reactive<IPost>({
-  description: '',
+  content: '',
   images: [],
-  status: 'public',
-  videoUrl: {} as File
+  postSatus: PostStatusEnum.Public,
+  videoUrl: null,
+  code: '',
+  tags: []
 })
 
 const imageUploadRef = ref()
 const videoUploadRef = ref()
 
 function handlePost(event: Event) {
-  console.log('state', state)
   if (state.images.length > 5) return
-  // postStore.addPost(state)
+  postStore.addPost(state)
 }
 function handleReset() {
   state.images = []
   imageUploadRef.value.reset()
   videoUploadRef.value.reset()
 }
-
-// function uploader(values: File[]) {
-//   // state.images = values as any
-// }
-
-const isVideo = computed(() => !!state.videoUrl)
 
 function handleRemove(index: number) {
   state.images.splice(index, 1)

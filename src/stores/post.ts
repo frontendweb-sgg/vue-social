@@ -32,15 +32,21 @@ export const usePostStore = defineStore('post', {
         this.loading = true
         const formdata = new FormData()
 
-        formdata.append('title', payload.title)
-        formdata.append('description', payload.description)
+        formdata.append('content', payload.content)
+        formdata.append('postSatus', payload.postSatus!)
+        formdata.append('videoUrl', payload.videoUrl!)
         for (const image of payload.images!) {
           formdata.append('images', image)
         }
 
-        const response = await Api.post('/post', formdata)
+        const response = await Api.post('/post', formdata, {
+          headers: { 'Content-Type': 'multipart/form-data' }
+        })
+
         this.loading = false
-        this.posts = response.data
+
+        this.posts = [...this.posts, response.data]
+        toast.success('Post added!')
       } catch (error) {
         if (error instanceof Error) toast.error(error.message)
       }

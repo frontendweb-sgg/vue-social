@@ -76,31 +76,3 @@ const Icon = computed(() => icons[props.icon as keyof typeof icons])
 </script>
 
 <style></style>
-
-<!-- <div
-    class="border group border-gray-50 h-60 rounded-md min-h-32 flex items-center justify-center"
-  >
-    <div class="grid grid-cols-2 h-full">
-      
-
-      <div class="col" v-if="!icon">
-        <label>
-          <input
-            :multiple="props.multiple"
-            @change="handleChange"
-            class="opacity-0"
-            ref="input"
-            type="file"
-          />
-          <div class="text-center font-medium flex items-center flex-col">
-            <UploadIcon class="text-indigo-500" :size="40" />
-            <span class="mt-5 mb-3 text-sm">{{ AppContent.dragDrop }}</span>
-            <button type="button" class="px-4 py-1 text-white rounded-md shadow-sm bg-indigo-600">
-              {{ AppContent.browse }}
-            </button>
-          </div>
-        </label>
-      </div> 
-      <div class="col bg-gray-50/30 overflow-y-auto"></div>
-    </div>
-  </div> -->

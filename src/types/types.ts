@@ -1,4 +1,4 @@
-import type { Status } from '@/utils/enums'
+import type { PostStatusEnum, Status } from '@/utils/enums'
 
 export interface IUserSignin {
   email: string
@@ -34,13 +34,16 @@ export interface Menu {
 export interface IPost {
   id?: string
   user?: string
-  title: string
-  slug?: string
-  description: string
+  content: string
+  images: File[]
+  code?: string
+  videoUrl: File | null
   active?: boolean
-  images?: string[]
   comments?: IComment[]
   likes?: ILike[]
+  tags?: string[]
+  status?: Status
+  postSatus?: PostStatusEnum
 }
 
 export interface ILike {
@@ -53,3 +56,5 @@ export interface IComment {
   message: string
   status: Status
 }
+export type Color = 'primary' | 'secondary' | 'info' | 'success' | 'warning' | 'default' | 'gray'
+export type Size = 'xs' | 'sm' | 'md' | 'lg' | 'xl'
