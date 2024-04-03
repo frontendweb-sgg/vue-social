@@ -1,5 +1,6 @@
 import { Api } from '@/axios-instance'
 import type { IUser, IUserSignin, IUserSignup } from '@/types/types'
+import { AxiosError } from 'axios'
 import { defineStore } from 'pinia'
 import { toast } from 'vue3-toastify'
 
@@ -24,6 +25,8 @@ export const useAuthStore = defineStore('auth', {
       redirectedUrl: '/'
     }) as Auth,
   getters: {
+    avatar: (state) => state.user?.avatar,
+    userId: (state) => state.user?.id,
     isAuth: (state) => !!state.token,
     isAdmin: (state) => state.user?.role === 'admin',
     isUser: (state) => state.user?.role === 'user',
@@ -38,6 +41,7 @@ export const useAuthStore = defineStore('auth', {
   actions: {
     async signIn(payload: IUserSignin) {
       try {
+        console.log('payload', payload)
         this.loading = true
         const { data } = await Api.post<AuthResponse>('/auth', payload)
 
@@ -60,7 +64,12 @@ export const useAuthStore = defineStore('auth', {
           this.router.push('/user')
         }
       } catch (error) {
-        if (error instanceof Error) toast.error(error.message)
+        if (error instanceof AxiosError) {
+          const errors = error.response?.data.errors
+          for (let error of errors) {
+            toast.error(error.message)
+          }
+        }
       } finally {
         this.loading = false
       }
@@ -68,21 +77,22 @@ export const useAuthStore = defineStore('auth', {
     async signUp(payload: IUserSignup) {
       try {
         this.loading = true
-        const response = await Api.post('/auth/signup', payload)
-        if (response.status === 201) {
-          toast.success('Account created successfully!, please login')
-          setTimeout(() => {
-            this.router.push('/auth')
-          }, 3000)
-        }
+        await Api.post('/auth/signup', payload)
+        toast.success('Account created successfully!, please login')
+        setTimeout(() => {
+          this.router.push('/auth')
+        }, 3000)
       } catch (error) {
-        if (error instanceof Error) toast.error(error.message)
+        if (error instanceof AxiosError) {
+          const errors = error.response?.data.errors
+          for (let error of errors) {
+            toast.error(error.message)
+          }
+        }
       } finally {
         this.loading = false
       }
     },
-
-    // Logout
     logout() {
       this.$reset()
       localStorage.removeItem('token')
@@ -91,9 +101,9 @@ export const useAuthStore = defineStore('auth', {
       if (timer) {
         clearTimeout(timer)
       }
+      console.log('hi')
+      this.router.push('/auth')
     },
-
-    // check use is logged in
     checkUserIsLoggedIn() {
       const user = JSON.parse(localStorage.getItem('user') as string) as IUser
       const expireTime = new Date(localStorage.getItem('expireTime') as string)
@@ -107,8 +117,6 @@ export const useAuthStore = defineStore('auth', {
         this.autoLogout((expireTime.getTime() - new Date().getTime()) / 1000)
       }
     },
-
-    // autologout
     autoLogout(time: number) {
       timer = setTimeout(() => {
         this.logout()

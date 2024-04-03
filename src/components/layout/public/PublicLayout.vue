@@ -6,6 +6,7 @@
     </main>
     <Footer />
   </div>
+  <scrolltop />
 </template>
 
 <script lang="ts">
@@ -14,6 +15,7 @@ export default {}
 <script lang="ts" setup>
 import Header from '../Header.vue'
 import Footer from '../Footer.vue'
+import Scrolltop from '../../ui/Scrolltop.vue'
 </script>
 
 <style></style>

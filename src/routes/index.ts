@@ -98,7 +98,14 @@ const routes: RouteRecordRaw[] = [
 
 const router = createRouter({
   routes,
-  history: createWebHistory()
+  history: createWebHistory(),
+  scrollBehavior(to) {
+    return {
+      el: '#app',
+      top: 0,
+      behavior: 'smooth'
+    }
+  }
 })
 router.beforeEach((to, from, next) => {
   const authStore = useAuthStore()

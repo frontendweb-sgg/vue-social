@@ -9,9 +9,7 @@
 </template>
 
 <script lang="ts">
-export default {
-  components: { PageLoader }
-}
+export default {}
 </script>
 
 <script lang="ts" setup>
@@ -22,6 +20,7 @@ import { onMounted } from 'vue'
 import { useAuthStore } from './stores/auth'
 import { useConfirmStore } from './stores/confirm'
 import { useLoaderStore } from './stores/loader'
+
 const useLoader = useLoaderStore()
 const route = useRoute()
 
