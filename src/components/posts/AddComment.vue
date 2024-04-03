@@ -2,8 +2,7 @@
   <form @submit.prevent="handleSubmit" class="border-t border-gray-50 pt-3">
     <display-images v-if="state.images?.length" @update="handleRemove" :images="state.images" />
     <div class="flex items-center gap-1 dark:border-slate-700/40">
-      <img src="/avatar.png" alt="" class="w-6 h-6 rounded-full mr-2" />
-
+      <img :src="avatar !== '' ? avatar : '/avatar.png'" class="w-6 h-6 rounded-full mr-2" />
       <div class="flex-1 py-2 flex relative overflow-hidden">
         <textarea
           placeholder="Add comment..."
@@ -38,7 +37,8 @@ import { reactive, ref } from 'vue'
 import type { IComment } from '../../types/types'
 import { Status } from '../../utils/enums'
 import DisplayImages from '../ui/DisplayImages.vue'
-import { usePostStore } from '../../stores'
+import { useAuthStore, usePostStore } from '../../stores'
+import { storeToRefs } from 'pinia'
 const state = reactive<IComment>({
   message: '',
   status: Status.Pending,
@@ -51,6 +51,8 @@ const props = defineProps<{
 }>()
 
 const postStore = usePostStore()
+const authStore = useAuthStore()
+const { avatar } = storeToRefs(authStore)
 
 function handleReset() {
   state.images = []
