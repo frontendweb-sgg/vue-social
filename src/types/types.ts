@@ -47,6 +47,8 @@ export interface IPost {
 }
 
 export interface ILike {
+  _id?: string
+  id?: string
   user: string
   active: boolean
 }
