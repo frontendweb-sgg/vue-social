@@ -1,7 +1,8 @@
 <template>
   <div class="flex justify-between items-center">
     <div class="flex space-x-3">
-      <img :src="avatar" class="rounded-full bg-transparent w-8 h-8 overflow-hidden" />
+      <slot name="image"></slot>
+
       <div>
         <h6 class="font-medium t{ext-sm text-slate-700 leading-5">
           {{ name }}

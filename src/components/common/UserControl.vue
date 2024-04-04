@@ -3,14 +3,7 @@
     <dropdown>
       <template #button="{ handleToggle }">
         <button @click="handleToggle" class="flex items-center space-x-2">
-          <span v-if="loading" class="rounded-full bg-transparent w-8 h-8 overflow-hidden">
-            <LoaderIcon class="animate-spin" />
-          </span>
-          <img
-            v-else
-            :src="userStore.user?.avatar !== '' ? userStore.user?.avatar : '/avatar.png'"
-            class="rounded-full bg-transparent w-8 h-8 overflow-hidden"
-          />
+          <user-avatar />
           <label class="font-medium text-slate-800">{{ authStore.username }}</label>
         </button>
       </template>
@@ -42,6 +35,7 @@ import { AppContent } from '../../utils/content'
 import { UserIcon, LogOut, Settings } from 'lucide-vue-next'
 import { storeToRefs } from 'pinia'
 import { useUserStore } from '../../stores/user'
+import UserAvatar from './UserAvatar.vue'
 
 const authStore = useAuthStore()
 const { isAdmin } = storeToRefs(authStore)

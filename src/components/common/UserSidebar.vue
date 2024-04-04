@@ -14,7 +14,7 @@
       >
         <file-upload v-model="avatar" icon="Camera" class="text-white" />
       </div>
-      <img :src="userStore.user?.avatar ?? '/avatar.png'" class="object-cover w-28 h-28" />
+      <user-avatar type="sidebar" />
     </div>
     <h6 v-if="user" class="font-medium flex flex-col items-center text-slate-900 mt-4">
       {{ user?.name }}
@@ -30,6 +30,7 @@ export default {}
 </script>
 <script lang="ts" setup>
 import FileUpload from '../ui/FileUpload.vue'
+import UserAvatar from '../common/UserAvatar.vue'
 import { storeToRefs } from 'pinia'
 import { Smartphone, Send } from 'lucide-vue-next'
 import { computed, ref } from 'vue'
