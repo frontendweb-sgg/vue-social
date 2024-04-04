@@ -6,6 +6,7 @@
     </main>
     <Footer />
   </div>
+  <scrolltop />
 </template>
 
 <script lang="ts">
@@ -14,6 +15,13 @@ export default {}
 <script lang="ts" setup>
 import Header from '../Header.vue'
 import Footer from '../Footer.vue'
+import Scrolltop from '../../ui/Scrolltop.vue'
+
+import { onMounted } from 'vue'
+import { useUserStore } from '../../../stores/user'
+
+const userStore = useUserStore()
+onMounted(() => userStore.getLoggedInUser())
 </script>
 
 <style></style>

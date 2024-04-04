@@ -1,24 +1,47 @@
 <template>
-  <header class="fixed w-full py-3">
-    <Container>
-      <Logo type="white" />
-    </Container>
-  </header>
-  <div class="grid h-screen grid-cols-2">
-    <div class="col bg-slate-800 flex items-center justify-center flex-col">
-      <div class="flex flex-col">
-        <h1 class="mb-5 text-white text-[32px]">Authentication</h1>
-        <p class="max-w-[400px] text-white text-xs leading-5">
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit. In quae, non explicabo cumque
-          possimus labore! Expedita libero eius ullam recusandae debitis cum provident. Facilis
-          omnis quae atque nostrum in voluptates.
-        </p>
+  <div class="bg-gradient-to-r from-blue-600 to-violet-600">
+    <Container class="max-w-[1280px]">
+      <div class="grid h-screen grid-cols-2">
+        <div class="col flex justify-center items-center flex-col text-white">
+          <div class="max-w-[450px] mx-auto">
+            <Logo class="text-lg" type="white" />
+
+            <h1 class="pt-4 text-[24px]">{{ AppContent.authHeading }}</h1>
+            <p class="mt-3 leading-5 text-sm text-slate-300">
+              {{ AppContent.homePageContent }}
+            </p>
+            <ul class="flex items-center justify-between mt-5">
+              <li>
+                <span class="circle bg-orange mb-2 avatar sm vcenter text-white">
+                  <Users class="mb-2" />
+                </span>
+                <h6>Registered User</h6>
+                <span>10,000</span>
+              </li>
+              <li>
+                <span class="circle bg-orange mb-2 avatar sm vcenter text-white">
+                  <Newspaper class="mb-2" />
+                </span>
+
+                <h6>Post published</h6>
+                <span>1,000</span>
+              </li>
+              <li>
+                <span class="circle bg-orange mb-2 avatar sm vcenter text-white">
+                  <Heart class="mb-2"
+                /></span>
+                <h6>Happy users</h6>
+                <span>10,000</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="col relative flex items-center justify-center">
+          <slot></slot>
+        </div>
       </div>
-      <Footer class="text-white absolute bottom-0" />
-    </div>
-    <div class="col flex items-center justify-center">
-      <slot></slot>
-    </div>
+    </Container>
+    <Footer class="text-white absolute bottom-0 w-full" />
   </div>
 </template>
 
@@ -31,7 +54,8 @@ export default {
 import Container from '../../ui/Container.vue'
 import Footer from '../../layout/Footer.vue'
 import Logo from '../Logo.vue'
+import { AppContent } from '../../../utils/content'
+import { Users, Newspaper, Heart } from 'lucide-vue-next'
 </script>
 
-<style>
-</style>
+<style></style>

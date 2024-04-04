@@ -19,5 +19,26 @@ export const AppContent = {
   post: 'Post',
   moreThan5Image: 'You can not upload more than 5 files',
   reset: 'Reset',
-  reply: 'Replay'
+  reply: 'Replay',
+  profile: 'Profile',
+  settings: 'Settings',
+  logout: 'Logout',
+  footerText: 'All rights reserved',
+  poweredBy: 'LearnUi',
+  poweredByText: 'Powered by',
+  poweredByUrl: 'https://www.learnui.com',
+  welcomeTitle: 'Welcome to Profiler',
+  welcomeContent: `Profiler is a social network site that can be used to connect developers. 
+                    use this site for multipurpose social activities like job, videos, learning, 
+                    bloging and much more. Now join & connect with cool Developers around the world !!! `,
+
+  authLoginText: "If you don't have an account, please",
+  authRegisterText: 'If you have an account, please',
+  authForgetText: 'Back to login page, please',
+  authEmailVerify: 'Please verify your email',
+  appName: 'Profiler',
+  authHeading: 'Welcome Back!',
+  homePageContent: `Profiler is a social network site that can be used to connect developers. 
+                    use this site for multipurpose social activities like job, videos, learning, 
+                    bloging and much more. Now join & connect with cool Developers around the world !!! `
 }

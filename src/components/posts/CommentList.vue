@@ -6,13 +6,16 @@
       :key="comment._id"
     >
       <div class="pt-1">
-        <img src="/avatar.png" class="rounded-full overflow-hidden" width="25" />
+        <user-avatar class="h-6 w-6" v-if="userId === comment.user" />
+        <img src="/avatar.png" v-else class="rounded-full overflow-hidden" width="25" />
       </div>
       <div>
         <h6 class="text-sm font-medium text-slate-800">Pradeep Kumar</h6>
         <p class="text-sm text-slate-600">{{ comment.message }}</p>
       </div>
+
       <button
+        v-if="userId === comment.user"
         @click="() => handleDelete(comment?.id)"
         class="opacity-0 hover:text-rose-500 group-hover:opacity-100 absolute top-3 right-0"
       >
@@ -28,7 +31,12 @@ export default {}
 <script lang="ts" setup>
 import type { IComment } from '../../types/types'
 import { X } from 'lucide-vue-next'
-import { usePostStore } from '../../stores'
+import { useAuthStore, usePostStore } from '../../stores'
+import { storeToRefs } from 'pinia'
+import UserAvatar from '../common/UserAvatar.vue'
+
+const authStore = useAuthStore()
+const { userId } = storeToRefs(authStore)
 
 const props = defineProps<{
   comments: IComment[] | undefined

@@ -1,15 +1,15 @@
 <template>
-  <div>
-    <label v-if="props.label" class="block text-slate-600 text-sm font-medium mb-2">{{
-      label
-    }}</label>
-    <div class="hover:ring-1 border border-gray-100 rounded-md">
-      <input
-        v-model="model"
-        v-bind="$attrs"
-        class="text-sm bg-transparent w-full p-2 outline-none"
-      />
-    </div>
+  <label v-if="props.label" class="block text-slate-600 text-sm font-medium mb-2">{{
+    label
+  }}</label>
+  <div
+    :class="[' ring-slate-800 hover:bg-gray-50 border border-gray-100 rounded-md', $attrs.class]"
+  >
+    <input
+      v-model="model"
+      v-bind="$attrs"
+      class="text-sm font-semibold bg-transparent w-full p-3 outline-none"
+    />
   </div>
 </template>
 

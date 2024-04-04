@@ -1,21 +1,16 @@
 <template>
   <div class="flex justify-between items-center">
     <div class="flex space-x-3">
-      <img
-        class="self-center overflow-hidden rounded-full ring-2 p-1 ring-gray-200"
-        src="/avatar.png"
-        width="32"
-        height="32"
-      />
+      <slot name="image"></slot>
+
       <div>
-        <h6 class="font-medium text-sm text-slate-700 leading-4">
-          Pradeep Kumar
-          <span class="block text-xs text-slate-400 font-normal">{{ props.date }}</span>
+        <h6 class="font-medium t{ext-sm text-slate-700 leading-5">
+          {{ name }}
+          <span class="block text-xs text-slate-400 font-normal">{{ date }}</span>
         </h6>
       </div>
     </div>
-
-    <dropdown v-if="!props.noAction">
+    <dropdown v-if="userId === props.userId">
       <dropdown-item icon="Edit2Icon">
         {{ AppContent.edit }}
       </dropdown-item>
@@ -44,18 +39,26 @@ import { Edit2Icon, Trash2Icon, EyeIcon, EyeOff } from 'lucide-vue-next'
 import { AppContent } from '../../utils/content'
 import { useConfirmStore } from '../../stores/confirm'
 import { usePostStore } from '../../stores/post'
+import { useAuthStore } from '../../stores'
+import { storeToRefs } from 'pinia'
 
 const props = withDefaults(
   defineProps<{
     noAction?: boolean
-    postId?: string | undefined
-    date?: string
+    postId: string | undefined
+    date: string
+    name: string
+    avatar: string
+    userId: string | undefined
   }>(),
   {
-    date: new Date(Date.now()).toDateString()
+    date: new Date(Date.now()).toDateString(),
+    avatar: '/avatar-1.png'
   }
 )
 
+const authStore = useAuthStore()
+const { userId } = storeToRefs(authStore)
 const confirmStore = useConfirmStore()
 const postStore = usePostStore()
 function deletePost() {

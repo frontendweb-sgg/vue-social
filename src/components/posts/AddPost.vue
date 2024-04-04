@@ -1,6 +1,6 @@
 <template>
   <div class="border py-4 border-gray-50 mb-6 bg-white shadow-sm rounded-md">
-    <post-title no-action class="px-4 mb-4" />
+    <logged-in-user />
     <form @submit.prevent="handlePost" novalidate>
       <v-textarea
         :rows="4"
@@ -73,6 +73,7 @@ import { PostStatus } from '../../utils/constants'
 import { AppContent } from '../../utils/content'
 import type { IPost } from '../../types/types'
 import { Status, PostStatusEnum } from '../../utils/enums'
+import LoggedInUser from '../common/LoggedInUser.vue'
 
 const postStore = usePostStore()
 

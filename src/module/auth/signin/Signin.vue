@@ -1,31 +1,49 @@
 <template>
-  <div class="p-4 max-w-[360px] min-w-[320px] rounded-md">
-    <div class="mb-6">
-      <h2 class="text-[24px] font-medium">
-        {{ AppContent.signin }}
-      </h2>
-      <p class="text-xs">
-        {{ AppContent.loginSubtitle }}
-        <router-link to="/auth/signup" class="text-rose-600 font-medium hover:text-purple-800">
-          {{ AppContent.signup }}
-        </router-link>
-      </p>
-    </div>
-    <form @submit="handleLogin" class="space-y-3">
-      <Input type="email" placeholder="Enter email" v-model="state.email" />
-      <Input type="password" placeholder="******" v-model="state.password" />
-      <label class="py-2 space-x-2 block text-xs">
-        <input type="checkbox" /> <span>{{ AppContent.rememberMe }}</span>
-      </label>
-      <button
-        :disabled="auth.loading"
-        class="bg-slate-700 px-6 py-2 rounded-md text-white w-full"
-        type="submit"
-      >
-        <LoaderIcon v-if="auth.loading" :size="16" class="mr-2" /> {{ AppContent.signin }}
-      </button>
-    </form>
-  </div>
+  <auth-form
+    :title="AppContent.signin"
+    :link-text="AppContent.signup"
+    :subtitle="AppContent.loginSubtitle"
+    :validation-schema="validation"
+    to="/auth/signup"
+    @submit="handleLogin"
+    class="space-y-3"
+  >
+    <Field name="email" type="email" v-slot="{ field, meta }">
+      <Input
+        type="email"
+        placeholder="Enter email"
+        v-bind="field"
+        :class="{
+          'border-green-500 text-green-600 placeholder:text-green-600': meta.touched && meta.valid,
+          'border-red-600 text-red-500 placeholder:text-red-600': meta.touched && !meta.valid
+        }"
+      />
+    </Field>
+
+    <ErrorMessage name="email" class="text-xs text-red-700" />
+    <Field name="password" type="password" v-slot="{ field, meta }">
+      <Input
+        type="password"
+        placeholder="********"
+        v-bind="field"
+        :class="{
+          'border-green-500 text-green-600 placeholder:text-green-600': meta.touched && meta.valid,
+          'border-red-600 text-red-500 placeholder:text-red-600': meta.touched && !meta.valid
+        }"
+      />
+    </Field>
+    <ErrorMessage class="text-xs text-red-700" name="password" />
+    <label class="py-2 space-x-2 block text-xs">
+      <input type="checkbox" /> <span>{{ AppContent.rememberMe }}</span>
+    </label>
+    <button
+      :disabled="auth.loading"
+      class="bg-slate-900 px-6 py-2 rounded-md text-white w-full"
+      type="submit"
+    >
+      <LoaderIcon v-if="auth.loading" :size="16" class="mr-2" /> {{ AppContent.signin }}
+    </button>
+  </auth-form>
 </template>
 
 <script lang="ts">
@@ -33,20 +51,32 @@ export default {}
 </script>
 <script lang="ts" setup>
 import { ref } from 'vue'
+
+import AuthForm from '../../../components/auth/AuthForm.vue'
 import Input from '../../../components/ui/Input.vue'
 import { useAuthStore } from '../../../stores'
 import { AppContent } from '../../../utils/content'
 import { LoaderIcon } from 'lucide-vue-next'
-const state = ref({
-  email: 'pkumar1@pythian.com',
-  password: 'Admin@123'
+import { Field, ErrorMessage } from 'vee-validate'
+import * as yup from 'yup'
+
+const validation = yup.object({
+  email: yup
+    .string()
+    .required('Field is required')
+    .test('emailOrMobile', 'Enter a valid email or mobile number', (value) => {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+      const mobileRegex = /^\d{10}$/ // Assuming mobile number is a 10-digit number
+      return emailRegex.test(value) || mobileRegex.test(value)
+    }),
+  password: yup.string().required('Password is required!')
 })
 
 const auth = useAuthStore()
 
-function handleLogin(even: Event) {
-  even.preventDefault()
-  auth.signIn(state.value)
+function handleLogin(values: any) {
+  console.log(values)
+  auth.signIn(values)
 }
 </script>
 

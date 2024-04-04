@@ -2,6 +2,7 @@ import { Api } from '@/axios-instance'
 import type { IPost, IComment } from '@/types/types'
 import { defineStore } from 'pinia'
 import { toast } from 'vue3-toastify'
+import { formatDistanceToNow } from 'date-fns'
 
 interface Post {
   posts: IPost[]
@@ -15,7 +16,11 @@ export const usePostStore = defineStore('post', {
       posts: [],
       loading: false
     }) as Post,
-  getters: {},
+  getters: {
+    avatar: (state: Post) => {
+      return (userId: string) => state.posts.find((post) => post.id === userId).user.avatar
+    }
+  },
   actions: {
     async getPosts() {
       try {
