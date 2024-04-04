@@ -9,6 +9,7 @@ interface Auth {
   token: string
   user: IUser | null
   redirectedUrl: string
+  avatar?: string
 }
 interface AuthResponse {
   user: IUser
@@ -17,15 +18,14 @@ interface AuthResponse {
 }
 let timer: ReturnType<typeof setTimeout>
 export const useAuthStore = defineStore('auth', {
-  state: () =>
-    ({
-      loading: false,
-      token: '',
-      user: null,
-      redirectedUrl: '/'
-    }) as Auth,
+  state: (): Auth => ({
+    loading: false,
+    token: '',
+    user: null,
+    redirectedUrl: '/',
+    avatar: ''
+  }),
   getters: {
-    avatar: (state) => state.user?.avatar,
     userId: (state) => state.user?.id,
     isAuth: (state) => !!state.token,
     isAdmin: (state) => state.user?.role === 'admin',
@@ -41,7 +41,6 @@ export const useAuthStore = defineStore('auth', {
   actions: {
     async signIn(payload: IUserSignin) {
       try {
-        console.log('payload', payload)
         this.loading = true
         const { data } = await Api.post<AuthResponse>('/auth', payload)
 
@@ -98,6 +97,7 @@ export const useAuthStore = defineStore('auth', {
       localStorage.removeItem('token')
       localStorage.removeItem('user')
       localStorage.removeItem('expireTime')
+
       if (timer) {
         clearTimeout(timer)
       }
@@ -106,6 +106,7 @@ export const useAuthStore = defineStore('auth', {
     },
     checkUserIsLoggedIn() {
       const user = JSON.parse(localStorage.getItem('user') as string) as IUser
+
       const expireTime = new Date(localStorage.getItem('expireTime') as string)
       const token = localStorage.getItem('token')
 
@@ -114,6 +115,7 @@ export const useAuthStore = defineStore('auth', {
       } else {
         this.token = token
         this.user = user
+        this.avatar = user.avatar
         this.autoLogout((expireTime.getTime() - new Date().getTime()) / 1000)
       }
     },

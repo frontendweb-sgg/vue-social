@@ -3,8 +3,12 @@
     <dropdown>
       <template #button="{ handleToggle }">
         <button @click="handleToggle" class="flex items-center space-x-2">
+          <span v-if="loading" class="rounded-full bg-transparent w-8 h-8 overflow-hidden">
+            <LoaderIcon class="animate-spin" />
+          </span>
           <img
-            :src="avatar !== '' ? avatar : '/avatar.png'"
+            v-else
+            :src="userStore.user?.avatar !== '' ? userStore.user?.avatar : '/avatar.png'"
             class="rounded-full bg-transparent w-8 h-8 overflow-hidden"
           />
           <label class="font-medium text-slate-800">{{ authStore.username }}</label>
@@ -37,9 +41,14 @@ import { AppRoute } from '../../utils/routes'
 import { AppContent } from '../../utils/content'
 import { UserIcon, LogOut, Settings } from 'lucide-vue-next'
 import { storeToRefs } from 'pinia'
+import { useUserStore } from '../../stores/user'
 
 const authStore = useAuthStore()
-const { avatar, isAdmin } = storeToRefs(authStore)
+const { isAdmin } = storeToRefs(authStore)
+
+const userStore = useUserStore()
+const { user, loading } = storeToRefs(userStore)
+
 const path = computed(() => (isAdmin ? '/admin' : '/user'))
 </script>
 

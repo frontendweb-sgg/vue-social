@@ -30,6 +30,7 @@ const confirmStore = useConfirmStore()
 onMounted(() => {
   const token = localStorage.getItem('token')
   if (token) {
+    console.log('hi')
     authStore.checkUserIsLoggedIn()
   }
 })

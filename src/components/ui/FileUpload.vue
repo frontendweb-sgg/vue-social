@@ -3,9 +3,9 @@
     <label
       @mouseenter="handleOpen"
       @mouseleave="handleClose"
+      class="relative"
       :class="[$attrs.class]"
       :title="($attrs.title ?? '').toString()"
-      class="relative"
     >
       <tooltip class="bottom-7" v-if="open && $attrs.title">{{ $attrs.title }}</tooltip>
       <input

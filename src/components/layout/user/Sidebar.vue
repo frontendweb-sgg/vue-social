@@ -28,6 +28,6 @@ export default {}
 </script>
 <script lang="ts" setup>
 import { UserSidebarMenu } from './Menu'
-import UserSidebar from '@/components/common/UserSidebar.vue'
+import UserSidebar from '../../../components/common/UserSidebar.vue'
 </script>
 <style></style>

@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-gradient-to-r from-blue-800 to-indigo-900">
+  <div class="bg-gradient-to-r from-blue-600 to-violet-600">
     <Container class="max-w-[1280px]">
       <div class="grid h-screen grid-cols-2">
         <div class="col flex justify-center items-center flex-col text-white">

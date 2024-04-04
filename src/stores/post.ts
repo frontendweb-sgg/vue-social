@@ -18,7 +18,7 @@ export const usePostStore = defineStore('post', {
     }) as Post,
   getters: {
     avatar: (state: Post) => {
-      return (userId) => state.posts.find((post) => post.id === userId).user.avatar
+      return (userId: string) => state.posts.find((post) => post.id === userId).user.avatar
     }
   },
   actions: {
