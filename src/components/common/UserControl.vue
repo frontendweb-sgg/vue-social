@@ -3,7 +3,7 @@
     <dropdown>
       <template #button="{ handleToggle }">
         <button @click="handleToggle" class="flex items-center space-x-2">
-          <user-avatar />
+          <user-avatar class="h-8 w-8" />
           <label class="font-medium text-slate-800">{{ authStore.username }}</label>
         </button>
       </template>

@@ -8,7 +8,7 @@
       :postId="post?.id"
     >
       <template #image>
-        <user-avatar v-if="user?.id === userId" />
+        <user-avatar class="h-8 w-8" v-if="user?.id === userId" />
         <div class="shadow-md rounded-full w-8 h-8" v-else>
           <img
             :src="avatarImg ?? '/avatar-1.png'"

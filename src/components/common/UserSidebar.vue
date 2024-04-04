@@ -14,7 +14,7 @@
       >
         <file-upload v-model="avatar" icon="Camera" class="text-white" />
       </div>
-      <user-avatar type="sidebar" />
+      <user-avatar class="h-28 w-28" />
     </div>
     <h6 v-if="user" class="font-medium flex flex-col items-center text-slate-900 mt-4">
       {{ user?.name }}

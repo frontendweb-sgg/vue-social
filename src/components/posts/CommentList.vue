@@ -6,7 +6,8 @@
       :key="comment._id"
     >
       <div class="pt-1">
-        <img src="/avatar.png" class="rounded-full overflow-hidden" width="25" />
+        <user-avatar class="h-6 w-6" v-if="userId === comment.user" />
+        <img src="/avatar.png" v-else class="rounded-full overflow-hidden" width="25" />
       </div>
       <div>
         <h6 class="text-sm font-medium text-slate-800">Pradeep Kumar</h6>
@@ -32,6 +33,7 @@ import type { IComment } from '../../types/types'
 import { X } from 'lucide-vue-next'
 import { useAuthStore, usePostStore } from '../../stores'
 import { storeToRefs } from 'pinia'
+import UserAvatar from '../common/UserAvatar.vue'
 
 const authStore = useAuthStore()
 const { userId } = storeToRefs(authStore)
