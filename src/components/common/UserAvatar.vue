@@ -5,7 +5,7 @@
   <img
     class="object-cover overflow-hidden rounded-full bg-transparent"
     v-bind="$attrs"
-    :src="user?.avatar ?? '/avatar.png'"
+    :src="avatar ?? '/avatar.png'"
   />
 </template>
 
@@ -17,7 +17,7 @@ import { storeToRefs } from 'pinia'
 import { useUserStore } from '../../stores/user'
 
 const userStore = useUserStore()
-const { user, loading } = storeToRefs(userStore)
+const { user, loading, avatar } = storeToRefs(userStore)
 </script>
 
 <style></style>

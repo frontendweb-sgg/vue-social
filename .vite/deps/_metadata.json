@@ -1,0 +1,67 @@
+{
+  "hash": "4e008abb",
+  "configHash": "4901cdcc",
+  "lockfileHash": "33170db4",
+  "browserHash": "95958af6",
+  "optimized": {
+    "vue": {
+      "src": "../../node_modules/vue/dist/vue.runtime.esm-bundler.js",
+      "file": "vue.js",
+      "fileHash": "a3486086",
+      "needsInterop": false
+    },
+    "pinia": {
+      "src": "../../node_modules/pinia/dist/pinia.mjs",
+      "file": "pinia.js",
+      "fileHash": "f4c89379",
+      "needsInterop": false
+    },
+    "vue-router": {
+      "src": "../../node_modules/vue-router/dist/vue-router.mjs",
+      "file": "vue-router.js",
+      "fileHash": "15602ef7",
+      "needsInterop": false
+    },
+    "axios": {
+      "src": "../../node_modules/axios/index.js",
+      "file": "axios.js",
+      "fileHash": "38be1df9",
+      "needsInterop": false
+    },
+    "lucide-vue-next": {
+      "src": "../../node_modules/lucide-vue-next/dist/esm/lucide-vue-next.js",
+      "file": "lucide-vue-next.js",
+      "fileHash": "c98312d3",
+      "needsInterop": false
+    },
+    "vee-validate": {
+      "src": "../../node_modules/vee-validate/dist/vee-validate.esm.js",
+      "file": "vee-validate.js",
+      "fileHash": "53e02c59",
+      "needsInterop": false
+    },
+    "vue3-toastify": {
+      "src": "../../node_modules/vue3-toastify/dist/index.mjs",
+      "file": "vue3-toastify.js",
+      "fileHash": "533e76ee",
+      "needsInterop": false
+    },
+    "yup": {
+      "src": "../../node_modules/yup/index.esm.js",
+      "file": "yup.js",
+      "fileHash": "f773f52a",
+      "needsInterop": false
+    }
+  },
+  "chunks": {
+    "chunk-AYVSL3LM": {
+      "file": "chunk-AYVSL3LM.js"
+    },
+    "chunk-GU3YDFVY": {
+      "file": "chunk-GU3YDFVY.js"
+    },
+    "chunk-ZS7NZCD4": {
+      "file": "chunk-ZS7NZCD4.js"
+    }
+  }
+}

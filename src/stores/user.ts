@@ -10,7 +10,9 @@ interface UserResponse {
 }
 export const useUserStore = defineStore('user', {
   state: () => ({ loading: false, user: null }) as UserResponse,
-  getters: {},
+  getters: {
+    avatar: (state) => state.user?.avatar.url
+  },
   actions: {
     async getLoggedInUser() {
       try {

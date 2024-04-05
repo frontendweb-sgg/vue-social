@@ -18,7 +18,7 @@ export interface IUser {
   email: string
   password: string
   mobile: string
-  avatar: string
+  avatar: { url: string }
   role: string
   active: string
   emailVerify: boolean
