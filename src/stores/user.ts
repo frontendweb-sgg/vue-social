@@ -11,7 +11,16 @@ interface UserResponse {
 export const useUserStore = defineStore('user', {
   state: () => ({ loading: false, user: null }) as UserResponse,
   getters: {
-    avatar: (state) => state.user?.avatar.url
+    userId: (state) => state.user?.id,
+    avatar: (state) => state.user?.avatar.url ?? '/avatar.png',
+    mobile: (state) => state.user?.mobile,
+    name: (state) => {
+      const names = state.user?.name.split(' ') ?? ([] as string[])
+      if (names.length) {
+        return names[0][0] + '' + names[1][0]
+      }
+      return ''
+    }
   },
   actions: {
     async getLoggedInUser() {
@@ -35,7 +44,7 @@ export const useUserStore = defineStore('user', {
         const { data } = await Api.put<{ avatar: string }>('/user/avatar', payload, {
           headers: { 'Content-Type': 'multipart/form-data' }
         })
-        this.user?.avatar ? (this.user.avatar = data.avatar as string) : null
+        // this.user?.avatar ? (this.user.avatar.url = data.avatar as string) : null
       } catch (error) {
         if (error instanceof AxiosError) {
           const errors = error.response?.data.errors

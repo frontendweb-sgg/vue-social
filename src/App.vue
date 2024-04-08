@@ -1,11 +1,9 @@
 <template>
   <page-loader v-if="useLoader.visible" />
   <confirm-dialog v-if="confirmStore.visible" />
-  <component :is="route.meta.layout">
-    <router-view v-slot="{ Component }">
-      <component :is="Component"></component>
-    </router-view>
-  </component>
+  <router-view v-slot="{ Component }">
+    <component :is="Component"></component>
+  </router-view>
 </template>
 
 <script lang="ts">
@@ -30,7 +28,6 @@ const confirmStore = useConfirmStore()
 onMounted(() => {
   const token = localStorage.getItem('token')
   if (token) {
-    console.log('hi')
     authStore.checkUserIsLoggedIn()
   }
 })

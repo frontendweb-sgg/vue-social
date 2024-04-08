@@ -4,6 +4,7 @@ export const AppContent = {
   cancel: 'Cancel',
   signin: 'Sign in',
   signup: 'Sign up',
+  forgotPassword: 'Forgot Password',
   rememberMe: 'Remember me',
   loginSubtitle: `If you don't have an account, please click on`,
   signupSubtitle: `If you have an account, please click on`,

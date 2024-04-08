@@ -2,15 +2,14 @@
   <div class="flex justify-between items-center">
     <div class="flex space-x-3">
       <slot name="image"></slot>
-
       <div>
         <h6 class="font-medium t{ext-sm text-slate-700 leading-5">
           {{ name }}
-          <span class="block text-xs text-slate-400 font-normal">{{ date }}</span>
+          <span class="block text-xs text-slate-400 font-normal">{{ formatDate }}</span>
         </h6>
       </div>
     </div>
-    <dropdown v-if="userId === props.userId">
+    <dropdown v-if="userId === id">
       <dropdown-item icon="Edit2Icon">
         {{ AppContent.edit }}
       </dropdown-item>
@@ -39,28 +38,23 @@ import { Edit2Icon, Trash2Icon, EyeIcon, EyeOff } from 'lucide-vue-next'
 import { AppContent } from '../../utils/content'
 import { useConfirmStore } from '../../stores/confirm'
 import { usePostStore } from '../../stores/post'
-import { useAuthStore } from '../../stores'
-import { storeToRefs } from 'pinia'
+import { useLoggedInUser } from '../../composable/useUser'
+import { computed } from 'vue'
+import { formatDistanceToNow } from 'date-fns'
 
-const props = withDefaults(
-  defineProps<{
-    noAction?: boolean
-    postId: string | undefined
-    date: string
-    name: string
-    avatar: string
-    userId: string | undefined
-  }>(),
-  {
-    date: new Date(Date.now()).toDateString(),
-    avatar: '/avatar-1.png'
-  }
-)
+const props = defineProps<{
+  noAction?: boolean
+  postId: string | undefined
+}>()
 
-const authStore = useAuthStore()
-const { userId } = storeToRefs(authStore)
 const confirmStore = useConfirmStore()
 const postStore = usePostStore()
+
+const { id: postId, createdAt } = postStore.getPostById(props.postId!)
+
+const { userId } = useLoggedInUser()
+const { name, id } = postStore.getPostUser(postId!)
+
 function deletePost() {
   confirmStore.confirmDelete({
     onConfirm: () => {
@@ -69,6 +63,7 @@ function deletePost() {
     }
   })
 }
+const formatDate = computed(() => formatDistanceToNow(createdAt!))
 </script>
 
 <style></style>

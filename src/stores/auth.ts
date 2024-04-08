@@ -6,16 +6,17 @@ import { toast } from 'vue3-toastify'
 
 interface Auth {
   loading: boolean
-  token: string
   user: IUser | null
-  redirectedUrl: string
+  token: string
   avatar?: string
+  redirectedUrl: string
 }
 interface AuthResponse {
-  user: IUser
+  user: IUser | null
   accessToken: string
   expireIn: number
 }
+
 let timer: ReturnType<typeof setTimeout>
 export const useAuthStore = defineStore('auth', {
   state: (): Auth => ({
@@ -26,17 +27,9 @@ export const useAuthStore = defineStore('auth', {
     avatar: ''
   }),
   getters: {
-    userId: (state) => state.user?.id,
     isAuth: (state) => !!state.token,
     isAdmin: (state) => state.user?.role === 'admin',
-    isUser: (state) => state.user?.role === 'user',
-    username: (state) => {
-      const names = state.user?.name.split(' ') ?? ([] as string[])
-      if (names.length) {
-        return names[0][0] + '' + names[1][0]
-      }
-      return ''
-    }
+    isUser: (state) => state.user?.role === 'user'
   },
   actions: {
     async signIn(payload: IUserSignin) {
@@ -46,7 +39,6 @@ export const useAuthStore = defineStore('auth', {
 
         const today = new Date(Date.now())
         today.setTime(today.getTime() + data.expireIn * 1000)
-        const expireTime = data.expireIn * 1000
 
         localStorage.setItem('token', data.accessToken)
         localStorage.setItem('expireTime', today.toString())
@@ -55,11 +47,11 @@ export const useAuthStore = defineStore('auth', {
         this.autoLogout(data.expireIn)
         this.checkUserIsLoggedIn()
 
-        if (data.user.role === 'admin') {
+        if (data.user?.role === 'admin') {
           this.router.push('/admin')
         }
 
-        if (data.user.role === 'user') {
+        if (data.user?.role === 'user') {
           this.router.push('/user')
         }
       } catch (error) {
@@ -115,7 +107,6 @@ export const useAuthStore = defineStore('auth', {
       } else {
         this.token = token
         this.user = user
-        this.avatar = user.avatar
         this.autoLogout((expireTime.getTime() - new Date().getTime()) / 1000)
       }
     },

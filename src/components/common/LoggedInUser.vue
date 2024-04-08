@@ -3,11 +3,12 @@
     <span v-if="loading" class="rounded-full bg-transparent w-8 h-8 overflow-hidden bg-slate-100">
       <LoaderIcon class="animate-spin" />
     </span>
-    <img
+    <user-avatar class="w-8 h-8" />
+    <!-- <img
       v-else
       :src="user?.avatar ? user?.avatar : '/avatar.png'"
       class="rounded-full bg-transparent w-8 h-8 overflow-hidden"
-    />
+    /> -->
     <div>
       <h6 class="font-medium t{ext-sm text-slate-700 leading-5">
         {{ user?.name }}
@@ -25,6 +26,7 @@ export default {}
 <script lang="ts" setup>
 import { storeToRefs } from 'pinia'
 import { LoaderIcon } from 'lucide-vue-next'
+import UserAvatar from './UserAvatar.vue'
 
 import { useUserStore } from '../../stores/user'
 const userStore = useUserStore()

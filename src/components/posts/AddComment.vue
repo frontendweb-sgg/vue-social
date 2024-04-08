@@ -32,7 +32,6 @@ export default {}
 <script lang="ts" setup>
 import FileUpload from '../ui/FileUpload.vue'
 import DisplayImages from '../ui/DisplayImages.vue'
-import { AppContent } from '../../utils/content'
 import { SendIcon, Camera } from 'lucide-vue-next'
 import { reactive, ref } from 'vue'
 import { Status } from '../../utils/enums'

@@ -1,4 +1,4 @@
-import AuthLayout from '@/components/layout/auth/AuthLayout.vue'
+import AuthLayout from '@/module/auth/Auth.vue'
 import PublicLayout from '@/components/layout/public/PublicLayout.vue'
 import { useAuthStore } from '@/stores/auth'
 import { useLoaderStore } from '@/stores/loader'
@@ -16,10 +16,7 @@ const routes: RouteRecordRaw[] = [
   {
     path: '/auth',
     component: () => import(/* webpackChunkName: "auth" */ '@/module/auth/Auth.vue'),
-    meta: {
-      layout: AuthLayout,
-      auth: false
-    },
+    meta: { auth: false },
     children: [
       {
         path: '',
@@ -28,6 +25,10 @@ const routes: RouteRecordRaw[] = [
       {
         path: 'signup',
         component: () => import('@/module/auth/signup/Signup.vue')
+      },
+      {
+        path: 'forgot-password',
+        component: () => import('@/module/auth/forgot-password/ForgotPassword.vue')
       }
     ]
   },
@@ -64,10 +65,7 @@ const routes: RouteRecordRaw[] = [
   {
     path: '/user',
     component: () => import(/* webpackChunkName: "user" */ '@/module/user/User.vue'),
-    meta: {
-      layout: PublicLayout,
-      auth: true
-    },
+    meta: { auth: true },
     children: [
       {
         path: '',
