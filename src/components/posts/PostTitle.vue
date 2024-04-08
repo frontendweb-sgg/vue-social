@@ -63,7 +63,7 @@ function deletePost() {
     }
   })
 }
-const formatDate = computed(() => formatDistanceToNow(createdAt!))
+const formatDate = computed(() => (createdAt ? formatDistanceToNow(createdAt!) : createdAt))
 </script>
 
 <style></style>

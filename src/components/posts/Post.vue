@@ -12,7 +12,7 @@
       </template>
     </post-title>
     <p v-if="post.content" class="text-sm mb-4">{{ post.content }}</p>
-    <carousel v-if="images.length" :images="images" />
+    <carousel v-if="images?.length" :images="images" />
     <likes :post-id="post.id" :likes="post.likes" />
     <comment-list :post-id="post.id" :comments="post.comments" />
     <add-comment :post-id="props.post.id" />

@@ -55,6 +55,7 @@ export const usePostStore = defineStore('post', {
         })
 
         this.loading = false
+        console.log('post', response.data)
 
         this.posts = [...this.posts, response.data]
         toast.success('Post added!')
