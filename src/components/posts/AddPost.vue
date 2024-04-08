@@ -45,7 +45,12 @@
           <Button @click="handleReset" type="reset" class="hover:bg-gray-100">
             {{ AppContent.reset }}
           </Button>
-          <Button type="submit" class="bg-indigo-700 border border-indigo-700 text-white">
+          <Button
+            :disabled="postStore.loading"
+            type="submit"
+            class="bg-indigo-700 border border-indigo-700 text-white"
+          >
+            <LoaderIcon v-if="postStore.loading" :size="16" class="mr-2 animate-spin" />
             {{ AppContent.post }}
           </Button>
         </div>
@@ -66,13 +71,14 @@ import DisplayImages from '../ui/DisplayImages.vue'
 import Button from '../ui/Button.vue'
 import VideoDisplay from '../ui/VideoDisplay.vue'
 import { Camera, Video } from 'lucide-vue-next'
-import { computed, reactive, ref } from 'vue'
+import { reactive, ref } from 'vue'
 import { usePostStore } from '../../stores/post'
 import { PostStatus } from '../../utils/constants'
 import { AppContent } from '../../utils/content'
 import type { IPost } from '../../types/types'
 import { PostStatusEnum } from '../../utils/enums'
 import LoggedInUser from '../common/LoggedInUser.vue'
+import { LoaderIcon } from 'lucide-vue-next'
 
 const postStore = usePostStore()
 
