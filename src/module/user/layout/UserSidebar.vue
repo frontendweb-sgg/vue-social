@@ -17,7 +17,7 @@
       <user-avatar class="h-28 w-28" />
     </div>
     <h6 v-if="user" class="font-medium flex flex-col items-center text-slate-900 mt-4">
-      {{ user?.name }}
+      {{ name }}
       <span class="flex items-center text-xs mt-1 font-medium text-slate-500">
         <Smartphone :size="16" class="mr-2" /> {{ user?.mobile }}
       </span>
@@ -29,15 +29,14 @@
 export default {}
 </script>
 <script lang="ts" setup>
-import FileUpload from '../ui/FileUpload.vue'
-import UserAvatar from '../common/UserAvatar.vue'
-import { storeToRefs } from 'pinia'
+import FileUpload from '../../../components/ui/FileUpload.vue'
+import UserAvatar from '../../../components/common/UserAvatar.vue'
 import { Smartphone, Send } from 'lucide-vue-next'
 import { computed, ref } from 'vue'
-import { useUserStore } from '../../stores/user'
 
-const userStore = useUserStore()
-const { user } = storeToRefs(userStore)
+import { useLoggedInUser } from '../../../composable/useUser'
+
+const { changeAvatar, avatar: userAvatar, loading, name, user, userId } = useLoggedInUser()
 
 const avatar = ref<File | null>(null)
 const selectedAvatar = computed(() => (avatar.value ? URL.createObjectURL(avatar.value!) : null))
@@ -45,7 +44,7 @@ const selectedAvatar = computed(() => (avatar.value ? URL.createObjectURL(avatar
 function upload() {
   const formdata = new FormData()
   formdata.append('avatar', avatar.value!)
-  userStore.updateAvatar(formdata)
+  changeAvatar(formdata)
   avatar.value = null
 }
 
@@ -55,3 +54,4 @@ const avatarBoxClass = computed(() => ({
 </script>
 
 <style></style>
+../../../stores/user

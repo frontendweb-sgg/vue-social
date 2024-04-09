@@ -1,7 +1,7 @@
 <template>
   <nav>
     <ul class="flex items-center space-x-4">
-      <nav-item menu to="/notification">
+      <nav-item menu to="/user">
         <bell-icon :size="20" />
       </nav-item>
       <nav-item
@@ -19,9 +19,7 @@
 </template>
 
 <script lang="ts">
-export default {
-  components: { UserControl }
-}
+export default {}
 </script>
 
 <script lang="ts" setup>

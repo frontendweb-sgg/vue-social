@@ -1,5 +1,5 @@
 import { Api } from '@/axios-instance'
-import type { IPost, IComment } from '@/types/types'
+import type { IPost, IComment, IUser, ILike } from '@/types/types'
 import { defineStore } from 'pinia'
 import { toast } from 'vue3-toastify'
 import { formatDistanceToNow } from 'date-fns'
@@ -17,8 +17,14 @@ export const usePostStore = defineStore('post', {
       loading: false
     }) as Post,
   getters: {
+    getPostById(state) {
+      return (postId: string) => state.posts.find((post) => post.id === postId) as IPost
+    },
+    getPostUser(state) {
+      return (postId: string) => this.getPostById(postId)?.user as IUser
+    },
     avatar: (state: Post) => {
-      return (userId: string) => state.posts.find((post) => post.id === userId).user.avatar
+      // return (userId: string) => state.posts.find((post)=>post.user.)
     }
   },
   actions: {
@@ -49,6 +55,7 @@ export const usePostStore = defineStore('post', {
         })
 
         this.loading = false
+        console.log('post', response.data)
 
         this.posts = [...this.posts, response.data]
         toast.success('Post added!')

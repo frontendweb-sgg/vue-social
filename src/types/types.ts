@@ -11,14 +11,22 @@ export interface IUserSignup {
   password: string
   mobile: string
 }
-
+export interface Media {
+  public_id: string
+  url: string
+  resource_type?: string
+  access_mode?: string
+  folder?: string
+  version?: string
+  signature: string
+}
 export interface IUser {
   id?: string
   name: string
   email: string
   password: string
   mobile: string
-  avatar: string
+  avatar: Media | string
   role: string
   active: string
   emailVerify: boolean
@@ -58,7 +66,7 @@ export interface ILike {
 export interface IComment {
   _id?: string
   id?: string
-  user?: string
+  user?: IUser
   message: string
   status: Status
   images?: File[]

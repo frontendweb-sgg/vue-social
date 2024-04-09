@@ -1,5 +1,5 @@
 <template>
-  <header class="py-3 bg-white shadow-sm border-b border-gray-50">
+  <header class="py-4 bg-white shadow-sm border-b border-gray-50">
     <Container class="flex items-center justify-between">
       <Logo color="white" />
       <Navigation />

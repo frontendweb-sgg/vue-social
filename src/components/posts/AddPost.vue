@@ -4,7 +4,7 @@
     <form @submit.prevent="handlePost" novalidate>
       <v-textarea
         :rows="4"
-        class="rounded-none p-4 bg-gray-200/20 focus:bg-gray-100"
+        class="rounded-none p-4 bg-gray-200/30 focus:bg-gray-200/50"
         v-model="state.content"
         placeholder="What's in your mind..."
       ></v-textarea>
@@ -59,7 +59,6 @@ export default {}
 </script>
 <script lang="ts" setup>
 import VTextarea from '../ui/Textarea.vue'
-import PostTitle from './PostTitle.vue'
 import FileUpload from '../ui/FileUpload.vue'
 import VSelect from '../ui/Select.vue'
 import Box from '../ui/Box.vue'
@@ -72,7 +71,7 @@ import { usePostStore } from '../../stores/post'
 import { PostStatus } from '../../utils/constants'
 import { AppContent } from '../../utils/content'
 import type { IPost } from '../../types/types'
-import { Status, PostStatusEnum } from '../../utils/enums'
+import { PostStatusEnum } from '../../utils/enums'
 import LoggedInUser from '../common/LoggedInUser.vue'
 
 const postStore = usePostStore()

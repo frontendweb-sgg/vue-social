@@ -4,7 +4,8 @@
       <template #button="{ handleToggle }">
         <button @click="handleToggle" class="flex items-center space-x-2">
           <user-avatar class="h-8 w-8" />
-          <label class="font-medium text-slate-800">{{ authStore.username }}</label>
+          <text-loader v-if="loading" />
+          <label v-else class="font-medium text-slate-800">{{ name }}</label>
         </button>
       </template>
       <dropdown-item icon="UserIcon" :to="path + AppRoute.profile">
@@ -28,21 +29,20 @@ export default {}
 import Dropdown from '../ui/Dropdown.vue'
 import DropdownItem from '../ui/DropdownItem.vue'
 import Divider from '../ui/Divider.vue'
+import UserAvatar from './UserAvatar.vue'
+import TextLoader from '../ui/TextLoader.vue'
 import { computed } from 'vue'
 import { useAuthStore } from '../../stores/auth'
 import { AppRoute } from '../../utils/routes'
 import { AppContent } from '../../utils/content'
 import { UserIcon, LogOut, Settings } from 'lucide-vue-next'
 import { storeToRefs } from 'pinia'
-import { useUserStore } from '../../stores/user'
-import UserAvatar from './UserAvatar.vue'
+import { useLoggedInUser } from '../../composable/useUser'
 
 const authStore = useAuthStore()
 const { isAdmin } = storeToRefs(authStore)
 
-const userStore = useUserStore()
-const { user, loading } = storeToRefs(userStore)
-
+const { name, loading } = useLoggedInUser()
 const path = computed(() => (isAdmin ? '/admin' : '/user'))
 </script>
 

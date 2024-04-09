@@ -7,7 +7,7 @@
       <textarea
         v-model="message"
         v-bind="$attrs"
-        class="bg-transparent text-sm text-slate-600 w-full p-2 outline-none"
+        class="text-sm text-slate-600 w-full p-2 outline-none"
       ></textarea>
     </div>
   </div>

@@ -1,5 +1,5 @@
 import { Api } from '@/axios-instance'
-import type { IUser } from '@/types/types'
+import type { IUser, Media } from '@/types/types'
 import { AxiosError } from 'axios'
 import { defineStore } from 'pinia'
 import { toast } from 'vue3-toastify'
@@ -10,7 +10,21 @@ interface UserResponse {
 }
 export const useUserStore = defineStore('user', {
   state: () => ({ loading: false, user: null }) as UserResponse,
-  getters: {},
+  getters: {
+    userId: (state) => state.user?.id,
+    avatar: (state) => {
+      const avatar = state.user?.avatar as Media
+      return avatar?.url !== '' ? avatar?.url : '/avatar.png'
+    },
+    mobile: (state) => state.user?.mobile,
+    name: (state) => {
+      const names = state.user?.name.split(' ') ?? ([] as string[])
+      if (names.length) {
+        return names[0][0] + '' + names[1][0]
+      }
+      return ''
+    }
+  },
   actions: {
     async getLoggedInUser() {
       try {
@@ -30,17 +44,22 @@ export const useUserStore = defineStore('user', {
     },
     async updateAvatar(payload: FormData) {
       try {
-        const { data } = await Api.put<{ avatar: string }>('/user/avatar', payload, {
+        this.loading = true
+        const { data } = await Api.put<Media>('/user/avatar', payload, {
           headers: { 'Content-Type': 'multipart/form-data' }
         })
-        this.user?.avatar ? (this.user.avatar = data.avatar as string) : null
+
+        this.user?.avatar ? (this.user.avatar = data) : null
       } catch (error) {
         if (error instanceof AxiosError) {
           const errors = error.response?.data.errors
+
           for (let error of errors) {
             toast.error(error.message)
           }
         }
+      } finally {
+        this.loading = false
       }
     }
   }

@@ -5,7 +5,7 @@
         class="text-pink-500 bg-pink-100 hover:bg-gray-100 w-7 h-7 flex justify-center items-center rounded-full"
         ><HeartIcon :size="16"
       /></span>
-      <span class="font-semibold text-xs text-slate-600">{{ likes.length }}</span>
+      <span class="font-semibold text-xs text-slate-600">{{ likesCount.length }}</span>
     </button>
 
     <button @click="removeLike" class="flex items-center space-x-2">
@@ -13,7 +13,7 @@
         class="text-slate-500 bg-slate-100 hover:bg-pink-100 w-7 h-7 flex justify-center items-center rounded-full"
         ><HeartCrack :size="16"
       /></span>
-      <span class="font-semibold text-xs text-slate-600">{{ dislikes.length }}</span>
+      <span class="font-semibold text-xs text-slate-600">{{ dislikesCount.length }}</span>
     </button>
   </div>
 </template>
@@ -29,11 +29,12 @@ import { computed } from 'vue'
 
 const postStore = usePostStore()
 const props = defineProps<{
-  data: ILike[] | undefined
   postId: string | undefined
+  likes?: ILike[] | undefined
 }>()
-const likes = computed(() => (props.data ?? []).filter((like) => like.active === true))
-const dislikes = computed(() => (props.data ?? []).filter((like) => like.active === false))
+
+const likesCount = computed(() => (props.likes ?? []).filter((like) => like.active === true))
+const dislikesCount = computed(() => (props.likes ?? []).filter((like) => like.active === false))
 
 const removeLike = () => postStore.removeLike(props.postId!)
 const addLike = () => postStore.addLike(props.postId!)
