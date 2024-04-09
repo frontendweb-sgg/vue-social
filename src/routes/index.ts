@@ -66,9 +66,11 @@ const routes: RouteRecordRaw[] = [
     path: '/user',
     component: () => import(/* webpackChunkName: "user" */ '@/module/user/User.vue'),
     meta: { auth: true },
+
     children: [
       {
-        path: '',
+        path: 'dashboard',
+        alias: ['', 'dashboard'],
         component: () => import('@/module/user/dashboard/Dashboard.vue')
       },
       {
