@@ -44,7 +44,7 @@ export interface IPost {
   id?: string
   user?: IUser | string
   content: string
-  images: File[]
+  images: Media[]
   code?: string
   videoUrl: File | null
   active?: boolean

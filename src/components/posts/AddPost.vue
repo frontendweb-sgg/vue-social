@@ -70,19 +70,19 @@ import Box from '../ui/Box.vue'
 import DisplayImages from '../ui/DisplayImages.vue'
 import Button from '../ui/Button.vue'
 import VideoDisplay from '../ui/VideoDisplay.vue'
+import LoggedInUser from '../common/LoggedInUser.vue'
+import type { IPost } from '../../types/types'
 import { Camera, Video } from 'lucide-vue-next'
 import { reactive, ref } from 'vue'
 import { usePostStore } from '../../stores/post'
 import { PostStatus } from '../../utils/constants'
 import { AppContent } from '../../utils/content'
-import type { IPost } from '../../types/types'
 import { PostStatusEnum } from '../../utils/enums'
-import LoggedInUser from '../common/LoggedInUser.vue'
 import { LoaderIcon } from 'lucide-vue-next'
 
 const postStore = usePostStore()
 
-let state = reactive<IPost>({
+let state = reactive({
   content: '',
   images: [],
   postSatus: PostStatusEnum.Public,
@@ -94,18 +94,22 @@ let state = reactive<IPost>({
 const imageUploadRef = ref()
 const videoUploadRef = ref()
 
-function handlePost(event: Event) {
-  if (state.images.length > 5) return
-  postStore.addPost(state)
-}
 function handleReset() {
   state.images = []
+  state.content = ''
+  state.videoUrl = null
   imageUploadRef.value.reset()
   videoUploadRef.value.reset()
 }
 
 function handleRemove(index: number) {
   state.images.splice(index, 1)
+}
+
+function handlePost(event: Event) {
+  if (state.images.length > 5) return
+  postStore.addPost(state)
+  handleReset()
 }
 </script>
 

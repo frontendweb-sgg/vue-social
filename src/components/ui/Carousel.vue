@@ -5,15 +5,14 @@
     data-carousel="slide"
   >
     <div class="relative h-full overflow-hidden rounded-lg">
-      <!-- Item 1 -->
-      <template v-for="(image, index) in props.images" :key="image">
+      <template v-for="(image, index) in props.images" :key="image.url">
         <transition name="fade" mode="in-out">
           <div
             class="duration-700 border border-gray-50 h-full overflow-hidden ease-in-out bg-white"
             v-if="index === active"
           >
             <img
-              :src="image"
+              :src="image.url"
               class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
               alt="..."
             />
@@ -60,10 +59,11 @@ export default {}
 <script lang="ts" setup>
 import { computed, ref } from 'vue'
 import { ChevronLeft, ChevronRight } from 'lucide-vue-next'
+import type { Media } from '../../types/types'
 const active = ref(0)
 
 const props = defineProps<{
-  images: string[] | undefined
+  images: Media[] | undefined
 }>()
 
 const length = computed(() => (props.images?.length as number) - 1)
