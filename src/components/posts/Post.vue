@@ -5,7 +5,7 @@
         <user-avatar class="h-8 w-8" v-if="loggedInUser" />
         <div class="shadow-md rounded-full w-8 h-8" v-else>
           <img
-            :src="avatarImg ?? '/avatar-1.png'"
+            :src="post?.user?.avatar?.url ?? '/avatar-1.png'"
             class="rounded-full bg-transparent w-8 h-8 overflow-hidden"
           />
         </div>
@@ -40,7 +40,6 @@ const props = defineProps<{
 
 const { userId } = useLoggedInUser()
 
-const avatarImg = computed(() => `${imageUrl}${(props.post.user as IUser).avatar}`)
 const loggedInUser = computed(() => (props.post.user as IUser).id === userId.value)
 </script>
 

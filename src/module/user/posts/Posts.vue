@@ -1,6 +1,9 @@
 <template>
   <div class="grid grid-cols-12">
     <div class="col-span-8">
+      <div v-if="postStore.posts.length === 0">
+        There is no post, please create post from dashboard
+      </div>
       <post-skeleton v-if="postStore.loading" />
       <post v-else v-for="post in postStore.posts" :key="post.id" :post="post" />
     </div>

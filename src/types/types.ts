@@ -66,7 +66,7 @@ export interface ILike {
 export interface IComment {
   _id?: string
   id?: string
-  user?: IUser
+  user: IUser
   message: string
   status: Status
   images?: File[]
