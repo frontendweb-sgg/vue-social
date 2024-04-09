@@ -4,6 +4,7 @@ import { AxiosError } from 'axios'
 import { defineStore } from 'pinia'
 import { toast } from 'vue3-toastify'
 import { usePostStore } from '.'
+import { useProfileStore } from './profile'
 
 interface UserResponse {
   user: IUser | null
@@ -29,8 +30,12 @@ export const useUserStore = defineStore('user', {
   actions: {
     async getLoggedInUser() {
       try {
+        const profileStore = useProfileStore()
         this.loading = true
         const response = await Api.get('/user/me')
+        if (response.status === 200) {
+          profileStore.getProfile()
+        }
         this.user = response.data
       } catch (error) {
         if (error instanceof AxiosError) {

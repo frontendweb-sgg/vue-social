@@ -1,7 +1,7 @@
 <template>
   <header class="py-4 bg-white shadow-sm border-b border-gray-50">
     <Container class="flex items-center justify-between">
-      <Logo color="white" />
+      <Logo to="/user" color="white" />
       <Navigation />
     </Container>
   </header>

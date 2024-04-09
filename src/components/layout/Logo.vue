@@ -15,12 +15,15 @@ export default {}
 </script>
 <script lang="ts" setup>
 import { defineProps } from 'vue'
+import { RouteRecordName } from 'vue-router'
 const props = withDefaults(
   defineProps<{
     type?: 'black' | 'white'
+    to: RouteRecordName
   }>(),
   {
-    type: 'black'
+    type: 'black',
+    to: '/'
   }
 )
 </script>
