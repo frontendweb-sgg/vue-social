@@ -2,6 +2,7 @@ import { Api } from '@/axios-instance'
 import type { IUser, IUserSignin, IUserSignup } from '@/types/types'
 import { AxiosError } from 'axios'
 import { defineStore } from 'pinia'
+import { useRoute } from 'vue-router'
 import { toast } from 'vue3-toastify'
 
 interface Auth {
@@ -89,11 +90,10 @@ export const useAuthStore = defineStore('auth', {
       localStorage.removeItem('token')
       localStorage.removeItem('user')
       localStorage.removeItem('expireTime')
-
+      this.redirectedUrl = '/'
       if (timer) {
         clearTimeout(timer)
       }
-      console.log('hi')
       this.router.push('/auth')
     },
     checkUserIsLoggedIn() {

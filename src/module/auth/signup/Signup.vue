@@ -65,11 +65,9 @@ export default {}
 <script lang="ts" setup>
 import Input from '../../../components/ui/Input.vue'
 import AuthForm from '../../../components/auth/AuthForm.vue'
-import type { IUserSignup } from '../../../types/types'
-import { reactive } from 'vue'
 import { AppContent } from '../../../utils/content'
 import { Form, Field, ErrorMessage, useForm } from 'vee-validate'
-import { useAuthStore } from '../../../stores/auth'
+import { useAuthStore } from '../store/auth'
 import { LoaderIcon } from 'lucide-vue-next'
 import * as yup from 'yup'
 
@@ -83,7 +81,6 @@ const validation = yup.object({
 })
 
 function onSumbmit(values: any) {
-  console.log('values', values)
   authStore.signUp(values)
 }
 </script>

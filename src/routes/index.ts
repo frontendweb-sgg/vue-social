@@ -1,31 +1,20 @@
 import AuthLayout from '@/module/auth/Auth.vue'
-import PublicLayout from '@/components/layout/public/PublicLayout.vue'
-import { useAuthStore } from '@/stores/auth'
+import { useAuthStore } from '@/module/auth/store/auth'
 import { useLoaderStore } from '@/stores/loader'
 import { createRouter, createWebHistory, type RouteRecordRaw } from 'vue-router'
 
 const routes: RouteRecordRaw[] = [
   {
     path: '/',
-    component: () => import(/* webpackChunkName:"home" */ '@/module/home/Home.vue'),
-    meta: {
-      layout: PublicLayout,
-      auth: false
-    }
-  },
-  {
-    path: '/auth',
     component: () => import(/* webpackChunkName: "auth" */ '@/module/auth/Auth.vue'),
     meta: { auth: false },
     children: [
       {
         path: '',
+        alias: ['', '/auth'],
         component: () => import('@/module/auth/signin/Signin.vue')
       },
-      {
-        path: 'signup',
-        component: () => import('@/module/auth/signup/Signup.vue')
-      },
+      { path: 'signup', component: () => import('@/module/auth/signup/Signup.vue') },
       {
         path: 'forgot-password',
         component: () => import('@/module/auth/forgot-password/ForgotPassword.vue')
@@ -66,10 +55,9 @@ const routes: RouteRecordRaw[] = [
     path: '/user',
     component: () => import(/* webpackChunkName: "user" */ '@/module/user/User.vue'),
     meta: { auth: true },
-
     children: [
       {
-        path: 'dashboard',
+        path: '',
         alias: ['', 'dashboard'],
         component: () => import('@/module/user/dashboard/Dashboard.vue')
       },
@@ -115,12 +103,12 @@ router.beforeEach((to, from, next) => {
   const authStore = useAuthStore()
 
   if (!authStore.isAuth && to.meta.auth) {
-    console.log('Hi')
-    return next('/auth')
+    return next('/auth?redirectedFrom=' + to?.fullPath)
   } else {
     if (authStore.isAuth && !authStore.isAdmin && to.path === '/admin') {
       return next('/user')
     } else if (authStore.isAuth && !authStore.isUser && to.path === '/user') {
+      console.log('admin')
       return next('/admin')
     } else {
       return next()

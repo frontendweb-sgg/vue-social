@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col items-center text-center py-4 relative">
+  <div class="flex flex-col items-center text-center py-4">
     <div v-if="selectedAvatar" :class="avatarBoxClass">
       <div class="absolute z-10 top-2/4 left-2/4 -translate-x-1/2 -translate-y-1/2">
         <button class="text-white" @click="upload" v-if="selectedAvatar">

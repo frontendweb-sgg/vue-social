@@ -4,7 +4,7 @@
     :link-text="AppContent.signup"
     :subtitle="AppContent.loginSubtitle"
     :validation-schema="validation"
-    to="/auth/signup"
+    to="/signup"
     @submit="handleSubmit"
     class="space-y-3"
   >
@@ -37,7 +37,7 @@
       <label class="py-2 space-x-2 block">
         <input type="checkbox" /> <span>{{ AppContent.rememberMe }}</span>
       </label>
-      <router-link class="text-rose-600 flex items-center font-medium" to="/auth/forgot-password"
+      <router-link class="text-rose-600 flex items-center font-medium" to="/forgot-password"
         ><KeyRound :size="14" class="mr-2" /> Forgot Password</router-link
       >
     </div>
@@ -57,8 +57,6 @@
 export default {}
 </script>
 <script lang="ts" setup>
-import { ref } from 'vue'
-
 import AuthForm from '../../../components/auth/AuthForm.vue'
 import Input from '../../../components/ui/Input.vue'
 import { useAuthStore } from '../../../stores'
@@ -80,9 +78,7 @@ const validation = yup.object({
 })
 
 const auth = useAuthStore()
-
 function handleSubmit(values: any) {
-  console.log(values)
   auth.signIn(values)
 }
 </script>

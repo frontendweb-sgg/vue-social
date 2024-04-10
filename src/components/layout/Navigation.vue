@@ -31,7 +31,7 @@ import NavItem from '../ui/NavItem.vue'
 import { AppContent } from '../../utils/content'
 import { BellIcon, Rss, Images } from 'lucide-vue-next'
 
-import { useAuthStore } from '../../stores/auth'
+import { useAuthStore } from '../../module/auth/store/auth'
 import UserControl from '../common/UserControl.vue'
 
 const authStore = useAuthStore()
