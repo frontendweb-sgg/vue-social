@@ -42,8 +42,8 @@ import { useLoggedInUser } from '../../composable/useUser'
 const authStore = useAuthStore()
 const { isAdmin } = storeToRefs(authStore)
 
-const { name, loading } = useLoggedInUser()
-const path = computed(() => (isAdmin ? '/admin' : '/user'))
+const { name, loading, userId } = useLoggedInUser()
+const path = computed(() => (isAdmin.value ? '/admin' : '/user'))
 </script>
 
 <style></style>

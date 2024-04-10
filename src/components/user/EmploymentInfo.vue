@@ -6,7 +6,7 @@
         <li>
           {{ emp?.company }} ({{ emp?.location }})
           <span class="block">
-            From: {{ format(new Date(emp?.from), 'MM/dd/yyyy') }} <span v-if="emp?.to">-</span>
+            From: {{ format(emp?.from ?? '', 'MM/dd/yyyy') }} <span v-if="emp?.to">-</span>
             {{ emp?.to ? format(emp?.to, 'MM/dd/yyy') : '' }}
           </span>
         </li>

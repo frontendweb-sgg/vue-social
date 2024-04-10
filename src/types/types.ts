@@ -108,8 +108,8 @@ export interface IEducation {
   fieldOfStudy: string
   current?: boolean
   activityAndSocial?: string
-  from: Date | null
-  to?: Date | null
+  from: Date
+  to?: Date
   location?: string
   summary?: string
   grade?: string

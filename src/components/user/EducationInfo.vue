@@ -4,7 +4,7 @@
       <h5 class="font-medium text-slate-900">{{ edu?.degree }}- ({{ edu?.instituteName }})</h5>
       <span v-if="edu?.location">{{ edu?.location }}</span>
       <span>{{ edu?.fieldOfStudy }}</span>
-      <span>{{ edut?.grade }}</span>
+      <span>{{ edu?.grade }}</span>
       <span class="block">
         From: {{ format(new Date(edu?.from), 'MM/dd/yyyy') }} <span v-if="edu?.to">-</span>
         {{ edu?.to ? format(edu?.to, 'MM/dd/yyy') : '' }}
