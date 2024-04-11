@@ -19,9 +19,9 @@ export default {}
 <script lang="ts" setup>
 import { storeToRefs } from 'pinia'
 import { LoaderIcon } from 'lucide-vue-next'
-import UserAvatar from './UserAvatar.vue'
+import UserAvatar from '../../../components/common/UserAvatar.vue'
 
-import { useUserStore } from '../../stores/user'
+import { useUserStore } from '../store/user'
 const userStore = useUserStore()
 const { user, loading } = storeToRefs(userStore)
 </script>

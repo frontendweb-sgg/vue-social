@@ -17,7 +17,7 @@ export default {}
 import Post from '../../../../components/posts/Post.vue'
 import PostSkeleton from '../../../../components/ui/PostSkeleton.vue'
 import { onMounted } from 'vue'
-import { useUserStore } from '../../../../stores/user'
+import { useUserStore } from '../../store/user'
 import { usePostStore } from '../../../../stores'
 
 const userStore = useUserStore()

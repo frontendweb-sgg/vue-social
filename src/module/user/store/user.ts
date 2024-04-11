@@ -3,7 +3,7 @@ import type { IPost, IUser, Media } from '@/types/types'
 import { AxiosError } from 'axios'
 import { defineStore } from 'pinia'
 import { toast } from 'vue3-toastify'
-import { usePostStore } from '.'
+import { usePostStore } from '../../../stores'
 import { useProfileStore } from './profile'
 
 interface UserResponse {

@@ -31,10 +31,10 @@ export default {}
 </script>
 <script lang="ts" setup>
 import { ref, computed } from 'vue'
-import Container from '../ui/Container.vue'
+import Container from '../../../components/ui/Container.vue'
 import HeroAvatar from './HeroAvatar.vue'
 import HeroUpload from './HeroUpload.vue'
-import FileUpload from '../ui/FileUpload.vue'
+import FileUpload from '../../../components/ui/FileUpload.vue'
 import { Save } from 'lucide-vue-next'
 
 const heroBg = ref<File | null>(null)

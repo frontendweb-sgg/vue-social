@@ -25,9 +25,9 @@ import Header from '../../components/layout/Header.vue'
 import Footer from '../../components/layout/Footer.vue'
 import Sidebar from './widgets/layout/Sidebar.vue'
 import Container from '../../components/ui/Container.vue'
-import Hero from '../../components/common/Hero.vue'
+import Hero from './widgets/Hero.vue'
 import NavMenu from './widgets/layout/NavMenu.vue'
-import { useUserStore } from '../../stores/user'
+import { useUserStore } from './store/user'
 import { onMounted } from 'vue'
 
 const userStore = useUserStore()

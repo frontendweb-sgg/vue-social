@@ -1,4 +1,4 @@
-import { useUserStore } from '@/stores/user'
+import { useUserStore } from '@/module/user/store/user'
 import { storeToRefs } from 'pinia'
 
 export function useLoggedInUser() {

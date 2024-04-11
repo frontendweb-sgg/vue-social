@@ -16,12 +16,7 @@ export default {}
 import Header from '../Header.vue'
 import Footer from '../Footer.vue'
 import Scrolltop from '../../ui/Scrolltop.vue'
-
-import { onMounted } from 'vue'
-import { useUserStore } from '../../../stores/user'
-
-const userStore = useUserStore()
-onMounted(() => userStore.getLoggedInUser())
 </script>
 
 <style></style>
+../../../module/user/store/user

@@ -37,10 +37,10 @@ export default {}
 <script lang="ts" setup>
 import { computed, ref } from 'vue'
 
-import { useLoggedInUser } from '../../composable/useUser'
+import { useLoggedInUser } from '../../../composable/useUser'
 import { Smartphone, Camera, Send } from 'lucide-vue-next'
-import UserAvatar from './UserAvatar.vue'
-import FileUpload from '../ui/FileUpload.vue'
+import UserAvatar from '../../../components/common/UserAvatar.vue'
+import FileUpload from '../../../components/ui/FileUpload.vue'
 
 const avatar = ref<File | null>(null)
 

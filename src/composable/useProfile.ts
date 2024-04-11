@@ -1,4 +1,4 @@
-import { useProfileStore } from '@/stores/profile'
+import { useProfileStore } from '@/module/user/store/profile'
 import { storeToRefs } from 'pinia'
 
 export function useProfile() {
