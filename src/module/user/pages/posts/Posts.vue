@@ -14,10 +14,11 @@
 export default {}
 </script>
 <script lang="ts" setup>
-import Post from '../../../components/posts/Post.vue'
+import Post from '../../../../components/posts/Post.vue'
+import PostSkeleton from '../../../../components/ui/PostSkeleton.vue'
 import { onMounted } from 'vue'
-import { useUserStore } from '../../../stores/user'
-import { usePostStore } from '../../../stores'
+import { useUserStore } from '../../../../stores/user'
+import { usePostStore } from '../../../../stores'
 
 const userStore = useUserStore()
 const postStore = usePostStore()
