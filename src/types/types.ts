@@ -26,7 +26,7 @@ export interface IUser {
   email: string
   password: string
   mobile: string
-  avatar: Media | string
+  avatar: Media
   role: string
   active: string
   emailVerify: boolean
@@ -42,7 +42,7 @@ export interface Menu {
 
 export interface IPost {
   id?: string
-  user?: IUser | string
+  user?: IUser
   content: string
   images: Media[]
   code?: string
@@ -66,7 +66,7 @@ export interface ILike {
 export interface IComment {
   _id?: string
   id?: string
-  user: IUser
+  user?: IUser
   message: string
   status: Status
   images?: File[]
