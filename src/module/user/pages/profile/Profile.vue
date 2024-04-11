@@ -17,7 +17,7 @@ export default {}
 <script lang="ts" setup>
 import UserInfo from '../../widgets/UserInfo.vue'
 import ProfileInfo from '../../../../components/user/ProfileInfo.vue'
-import { useProfile } from '../../../../composable/useProfile'
+import { useProfile } from '../../composable/useProfile'
 import { useLoggedInUser } from '../../../../composable/useUser'
 import EmploymentInfo from '../../widgets/EmploymentInfo.vue'
 import EducationInfo from '../../widgets/EducationInfo.vue'

@@ -1,6 +1,7 @@
 <template>
   <aside>
     <profile-info />
+    <skills />
     <!-- 
   <aside class="p-4 bg-white shadow-sm rounded-md">
     <user-sidebar></user-sidebar>
@@ -27,11 +28,14 @@
 </template>
 
 <script lang="ts">
-export default {}
+export default {
+  components: { Skills }
+}
 </script>
 <script lang="ts" setup>
 import { UserSidebarMenu } from './Menu'
 import UserSidebar from './UserSidebar.vue'
 import ProfileInfo from '../ProfileInfo.vue'
+import Skills from '../Skills.vue'
 </script>
 <style></style>

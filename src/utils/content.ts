@@ -1,6 +1,8 @@
 export const AppContent = {
   brand: 'Vue Social',
   ok: 'Ok',
+  save: 'Save',
+  update: 'Update',
   cancel: 'Cancel',
   signin: 'Sign in',
   signup: 'Sign up',

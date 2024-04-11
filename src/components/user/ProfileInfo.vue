@@ -40,7 +40,7 @@ export default {}
 </script>
 <script lang="ts" setup>
 import Panel from '../ui/Panel.vue'
-import { useProfile } from '../../composable/useProfile'
+import { useProfile } from '../../module/user/composable/useProfile'
 
 const { loading, profile } = useProfile()
 </script>
