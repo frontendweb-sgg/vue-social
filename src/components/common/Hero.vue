@@ -1,6 +1,6 @@
 <template>
   <div
-    class="bg-slate-100 group mb-16 h-64 bg-cover bg-center before:absolute before:content-[''] before:w-full before:h-full before:bg-slate-900/60 relative"
+    class="bg-slate-100 group h-64 bg-cover bg-center before:absolute before:content-[''] before:w-full before:h-full before:bg-slate-900/60 relative"
     :style="{
       backgroundImage: `url(${selectedAvatar})`
     }"

@@ -59,23 +59,23 @@ const routes: RouteRecordRaw[] = [
       {
         path: '',
         alias: ['', 'dashboard'],
-        component: () => import('@/module/user/dashboard/Dashboard.vue')
+        component: () => import('@/module/user/pages/dashboard/Dashboard.vue')
       },
       {
         path: 'posts',
-        component: () => import('@/module/user/posts/Posts.vue')
+        component: () => import('@/module/user/pages/posts/Posts.vue')
       },
       {
         path: 'profile',
-        component: () => import('@/module/user/profile/Profile.vue')
+        component: () => import('@/module/user/pages/profile/Profile.vue')
       },
       {
         path: 'photos',
-        component: () => import('@/module/user/photos/Photos.vue')
+        component: () => import('@/module/user/pages/photos/Photos.vue')
       },
       {
         path: 'settings',
-        component: () => import('@/module/user/settings/Settings.vue')
+        component: () => import('@/module/user/pages/settings/Settings.vue')
       }
     ]
   },

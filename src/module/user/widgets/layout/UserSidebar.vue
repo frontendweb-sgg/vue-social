@@ -29,12 +29,12 @@
 export default {}
 </script>
 <script lang="ts" setup>
-import FileUpload from '../../../components/ui/FileUpload.vue'
-import UserAvatar from '../../../components/common/UserAvatar.vue'
+import FileUpload from '../../../../components/ui/FileUpload.vue'
+import UserAvatar from '../../../../components/common/UserAvatar.vue'
 import { Smartphone, Send } from 'lucide-vue-next'
 import { computed, ref } from 'vue'
 
-import { useLoggedInUser } from '../../../composable/useUser'
+import { useLoggedInUser } from '../../../../composable/useUser'
 
 const { changeAvatar, avatar: userAvatar, loading, name, user, userId } = useLoggedInUser()
 

@@ -28,7 +28,7 @@ export default {}
 <script lang="ts" setup>
 import Tooltip from './Tooltip.vue'
 import { computed, ref, watch, watchEffect, onUpdated } from 'vue'
-import { useToggle } from '../../hooks/useToggle'
+import { useToggle } from '../../composable/useToggle'
 import * as icons from 'lucide-vue-next'
 
 const { open, handleOpen, handleClose } = useToggle()

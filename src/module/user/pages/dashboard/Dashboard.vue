@@ -12,10 +12,10 @@
 export default {}
 </script>
 <script lang="ts" setup>
-import Post from '../../../components/posts/Post.vue'
-import AddPost from '../../../components/posts/AddPost.vue'
-import PostSkeleton from '../../../components/ui/PostSkeleton.vue'
-import { usePostStore } from '../../../stores/post'
+import Post from '../../../../components/posts/Post.vue'
+import AddPost from '../../../../components/posts/AddPost.vue'
+import PostSkeleton from '../../../../components/ui/PostSkeleton.vue'
+import { usePostStore } from '../../../../stores/post'
 import { storeToRefs } from 'pinia'
 import { onMounted } from 'vue'
 

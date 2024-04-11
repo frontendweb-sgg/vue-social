@@ -30,6 +30,6 @@ export default {}
 <script lang="ts" setup>
 import { UserSidebarMenu } from './Menu'
 import UserSidebar from './UserSidebar.vue'
-import ProfileInfo from '../../../components/user/ProfileInfo.vue'
+import ProfileInfo from '../../../../components/user/ProfileInfo.vue'
 </script>
 <style></style>
