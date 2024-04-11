@@ -76,6 +76,18 @@ const routes: RouteRecordRaw[] = [
       {
         path: 'settings',
         component: () => import('@/module/user/pages/settings/Settings.vue')
+      },
+      {
+        path: 'friend',
+        component: () => import('@/module/user/pages/friend/Friend.vue')
+      },
+      {
+        path: 'media',
+        component: () => import('@/module/user/pages/media/Media.vue')
+      },
+      {
+        path: 'group',
+        component: () => import('@/module/user/pages/group/Group.vue')
       }
     ]
   },

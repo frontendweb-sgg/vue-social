@@ -8,7 +8,7 @@
         <nav-item :class="linkClass" :active-class="active" to="/user/posts"
           ><Newspaper :size="20" /> <span> Posts </span></nav-item
         >
-        <nav-item :class="linkClass" :active-class="active" to="/user/posts">
+        <nav-item :class="linkClass" :active-class="active" to="/user/profile">
           <BookUser :size="20" /> <span> Profile </span></nav-item
         >
         <nav-item :class="linkClass" :active-class="active" to="/user/friend"
