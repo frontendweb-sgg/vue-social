@@ -1,4 +1,6 @@
 <template>
+  <profile-info />
+
   <aside class="p-4 bg-white shadow-sm rounded-md">
     <user-sidebar></user-sidebar>
     <profile-info></profile-info>
@@ -30,6 +32,6 @@ export default {}
 <script lang="ts" setup>
 import { UserSidebarMenu } from './Menu'
 import UserSidebar from './UserSidebar.vue'
-import ProfileInfo from '../../../../components/user/ProfileInfo.vue'
+import ProfileInfo from '../ProfileInfo.vue'
 </script>
 <style></style>
