@@ -1,11 +1,11 @@
 <template>
-  <profile-info />
-
+  <aside>
+    <profile-info />
+    <!-- 
   <aside class="p-4 bg-white shadow-sm rounded-md">
     <user-sidebar></user-sidebar>
-    <profile-info></profile-info>
 
-    <!-- <div v-for="(menu, index) in UserSidebarMenu" :key="index" class="mt-6">
+   <div v-for="(menu, index) in UserSidebarMenu" :key="index" class="mt-6">
       <span class="text-slate-500 block text-[10px] uppercase mb-2">{{ menu.title }}</span>
       <ul class="mb-5">
         <li

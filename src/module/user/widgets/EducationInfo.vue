@@ -18,9 +18,9 @@
 export default {}
 </script>
 <script lang="ts" setup>
-import { useProfile } from '../../composable/useProfile'
+import { useProfile } from '../../../composable/useProfile'
 import { format } from 'date-fns'
-import Panel from '../ui/Panel.vue'
+import Panel from '../../../components/ui/Panel.vue'
 const { educations } = useProfile()
 </script>
 

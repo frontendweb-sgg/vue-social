@@ -8,7 +8,7 @@
 export default {}
 </script>
 <script lang="ts" setup>
-import { useLoggedInUser } from '../../composable/useUser'
+import { useLoggedInUser } from '../../../composable/useUser'
 const { user, name, loading, userId } = useLoggedInUser()
 </script>
 
