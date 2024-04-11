@@ -3,7 +3,7 @@
     <label
       @mouseenter="handleOpen"
       @mouseleave="handleClose"
-      class="relative"
+      class="relative flex items-center cursor-pointer"
       :class="[$attrs.class]"
       :title="($attrs.title ?? '').toString()"
     >
@@ -17,6 +17,7 @@
         :multiple="props.multiple"
       />
       <Icon :size="20" class="cursor-pointer" />
+      <span v-if="props.label" class="ml-2">{{ label }}</span>
     </label>
   </form>
 </template>
@@ -35,6 +36,7 @@ const form = ref<HTMLFormElement>()
 const model = defineModel()
 
 defineOptions({ inheritAttrs: false })
+
 defineExpose({
   reset: () => {
     form.value?.reset()
@@ -45,6 +47,7 @@ defineExpose({
 const props = defineProps<{
   icon?: any
   multiple?: boolean
+  label?: string
 }>()
 
 const singleFile = ref<File | File[] | Object>(props.multiple ? [] : '')

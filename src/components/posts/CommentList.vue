@@ -7,7 +7,12 @@
     >
       <div class="pt-1">
         <user-avatar class="h-6 w-6" v-if="userId === comment.user?.id" />
-        <img src="/avatar.png" v-else class="rounded-full overflow-hidden" width="25" />
+        <img
+          :src="comment.user?.avatar.url ?? '/avatar.png'"
+          v-else
+          class="rounded-full overflow-hidden"
+          width="25"
+        />
       </div>
       <div>
         <h6 class="text-sm font-medium text-slate-800">

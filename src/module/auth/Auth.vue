@@ -4,7 +4,7 @@
       <div class="grid h-screen grid-cols-2">
         <div class="col flex justify-center items-center flex-col text-white">
           <div class="max-w-[450px] mx-auto">
-            <Logo class="text-lg" type="white" />
+            <Logo to="/" class="text-lg" type="white" />
             <h1 class="pt-4 text-[24px]">{{ AppContent.authHeading }}</h1>
             <p class="mt-3 leading-5 text-sm text-slate-300">
               {{ AppContent.homePageContent }}
@@ -53,19 +53,20 @@ import Footer from '../../components/layout/Footer.vue'
 
 import Container from '../../components/ui/Container.vue'
 import { AppContent } from '../../utils/content'
-import { useAuthStore } from '../../stores/auth'
 import { onBeforeMount } from 'vue'
 import { useRouter } from 'vue-router'
 import { Heart, Newspaper, Users } from 'lucide-vue-next'
+import { useAuth } from './composable/useAuth'
 
-const authStore = useAuthStore()
 const router = useRouter()
 
+const { isAuth, isAdmin, isUser } = useAuth()
+
 onBeforeMount(() => {
-  if (authStore.isAuth && authStore.isUser) {
+  if (isAuth.value && isUser.value) {
     router.replace('/user')
   }
-  if (authStore.isAuth && authStore.isAdmin) {
+  if (isAuth.value && isAdmin.value) {
     router.replace('/admin')
   }
 })

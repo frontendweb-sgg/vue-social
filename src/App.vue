@@ -13,14 +13,12 @@ export default {}
 <script lang="ts" setup>
 import ConfirmDialog from './components/ui/ConfirmDialog.vue'
 import PageLoader from './components/ui/PageLoader.vue'
-import { useRoute } from 'vue-router'
 import { onMounted } from 'vue'
-import { useAuthStore } from './stores/auth'
+import { useAuthStore } from './module/auth/store/auth'
 import { useConfirmStore } from './stores/confirm'
 import { useLoaderStore } from './stores/loader'
 
 const useLoader = useLoaderStore()
-const route = useRoute()
 
 const authStore = useAuthStore()
 const confirmStore = useConfirmStore()
@@ -34,3 +32,4 @@ onMounted(() => {
 </script>
 
 <style></style>
+./module/auth/store/auth

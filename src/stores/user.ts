@@ -1,8 +1,10 @@
 import { Api } from '@/axios-instance'
-import type { IUser, Media } from '@/types/types'
+import type { IPost, IUser, Media } from '@/types/types'
 import { AxiosError } from 'axios'
 import { defineStore } from 'pinia'
 import { toast } from 'vue3-toastify'
+import { usePostStore } from '.'
+import { useProfileStore } from './profile'
 
 interface UserResponse {
   user: IUser | null
@@ -28,8 +30,12 @@ export const useUserStore = defineStore('user', {
   actions: {
     async getLoggedInUser() {
       try {
+        const profileStore = useProfileStore()
         this.loading = true
         const response = await Api.get('/user/me')
+        if (response.status === 200) {
+          profileStore.getProfile()
+        }
         this.user = response.data
       } catch (error) {
         if (error instanceof AxiosError) {
@@ -60,6 +66,23 @@ export const useUserStore = defineStore('user', {
         }
       } finally {
         this.loading = false
+      }
+    },
+    async getLoggedInUserPost() {
+      try {
+        const postStore = usePostStore()
+        postStore.loading = true
+        const { data } = await Api.get<IPost[]>('/user/me/posts')
+        postStore.posts = data
+        postStore.loading = false
+      } catch (error) {
+        if (error instanceof AxiosError) {
+          const errors = error.response?.data.errors
+
+          for (let error of errors) {
+            toast.error(error.message)
+          }
+        }
       }
     }
   }

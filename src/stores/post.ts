@@ -38,7 +38,7 @@ export const usePostStore = defineStore('post', {
         if (error instanceof Error) toast.error(error.message)
       }
     },
-    async addPost(payload: IPost) {
+    async addPost(payload: any) {
       try {
         this.loading = true
         const formdata = new FormData()

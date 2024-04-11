@@ -3,6 +3,10 @@ import { storeToRefs } from 'pinia'
 
 export function usePost() {
   const postStore = usePostStore()
-  const { getPostById, getPostUser } = storeToRefs(postStore)
-  return { getPostById, getPostUser }
+  const { getPostById, getPostUser, posts } = storeToRefs(postStore)
+
+  function getPhotos() {
+    return posts.value.flatMap((post) => post.images)
+  }
+  return { getPostById, getPostUser, posts }
 }

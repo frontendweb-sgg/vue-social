@@ -5,16 +5,16 @@
         <user-avatar class="h-8 w-8" v-if="loggedInUser" />
         <div class="shadow-md rounded-full w-8 h-8" v-else>
           <img
-            :src="avatarImg ?? '/avatar-1.png'"
+            :src="post?.user?.avatar?.url ?? '/avatar-1.png'"
             class="rounded-full bg-transparent w-8 h-8 overflow-hidden"
           />
         </div>
       </template>
     </post-title>
     <p v-if="post.content" class="text-sm mb-4">{{ post.content }}</p>
-    <carousel v-if="images?.length" :images="images" />
+    <carousel v-if="props.post.images?.length" :images="post.images" />
     <likes :post-id="post.id" :likes="post.likes" />
-    <comment-list :post-id="post.id" :comments="post.comments" />
+    <comment-list v-if="post.comments?.length" :post-id="post.id" :comments="post.comments" />
     <add-comment :post-id="props.post.id" />
   </div>
 </template>
@@ -29,7 +29,7 @@ import CommentList from './CommentList.vue'
 import Likes from './Likes.vue'
 import PostTitle from './PostTitle.vue'
 import UserAvatar from '../common/UserAvatar.vue'
-import type { IPost, IUser } from '../../types/types'
+import type { IPost, IUser, Media } from '../../types/types'
 import { computed } from 'vue'
 import { imageUrl } from '../../utils/constants'
 import { useLoggedInUser } from '../../composable/useUser'
@@ -40,8 +40,6 @@ const props = defineProps<{
 
 const { userId } = useLoggedInUser()
 
-const avatarImg = computed(() => `${imageUrl}${(props.post.user as IUser).avatar}`)
-const images = props.post.images as unknown as string[]
 const loggedInUser = computed(() => (props.post.user as IUser).id === userId.value)
 </script>
 

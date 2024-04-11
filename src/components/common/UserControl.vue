@@ -32,7 +32,7 @@ import Divider from '../ui/Divider.vue'
 import UserAvatar from './UserAvatar.vue'
 import TextLoader from '../ui/TextLoader.vue'
 import { computed } from 'vue'
-import { useAuthStore } from '../../stores/auth'
+import { useAuthStore } from '../../module/auth/store/auth'
 import { AppRoute } from '../../utils/routes'
 import { AppContent } from '../../utils/content'
 import { UserIcon, LogOut, Settings } from 'lucide-vue-next'
@@ -42,8 +42,8 @@ import { useLoggedInUser } from '../../composable/useUser'
 const authStore = useAuthStore()
 const { isAdmin } = storeToRefs(authStore)
 
-const { name, loading } = useLoggedInUser()
-const path = computed(() => (isAdmin ? '/admin' : '/user'))
+const { name, loading, userId } = useLoggedInUser()
+const path = computed(() => (isAdmin.value ? '/admin' : '/user'))
 </script>
 
 <style></style>
